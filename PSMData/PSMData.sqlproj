@@ -65,4 +65,14 @@
   <ItemGroup>
     <None Include="PublishLocations\PSMData.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Brand.sql" />
+    <Build Include="dbo\Tables\Category.sql" />
+    <Build Include="dbo\Tables\Feature.sql" />
+    <Build Include="dbo\Tables\FeatureValue.sql" />
+    <Build Include="dbo\Tables\FeatureCombination.sql" />
+    <Build Include="dbo\Tables\Product.sql" />
+    <Build Include="dbo\Tables\Variant.sql" />
+    <Build Include="dbo\Tables\FeatureCombinationOfValue.sql" />
+  </ItemGroup>
 </Project>
