@@ -20,5 +20,16 @@ namespace PSMDataManager.Library.DataAccess
 
             return variant;
         }
+
+        public List<VariantModel> GetVariants()
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            dynamic parameters = new { };
+
+            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantGetAll", parameters, "DefaultConnection");
+
+            return variants;
+        }
     }
 }

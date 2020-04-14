@@ -20,5 +20,16 @@ namespace PSMDataManager.Library.DataAccess
 
             return product;
         }
+
+        public List<ProductModel> GetProducts()
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            dynamic parameters = new { };
+
+            var products = sql.LoadData<ProductModel, dynamic>("dbo.spProductGetAll", parameters, "DefaultConnection");
+
+            return products;
+        }
     }
 }

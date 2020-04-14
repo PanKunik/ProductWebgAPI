@@ -12,9 +12,11 @@ namespace PSMDataManager.Controllers
     public class VariantsController : ApiController
     {
         // GET: api/Variants
-        public IEnumerable<string> Get()
+        public List<VariantModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            VariantData data = new VariantData();
+
+            return data.GetVariants();
         }
 
         // GET: api/Variants/5

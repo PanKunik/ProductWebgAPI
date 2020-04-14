@@ -13,9 +13,11 @@ namespace PSMDataManager.Controllers
     public class ProductsController : ApiController
     {
         // GET: api/Products
-        public IEnumerable<string> Get()
+        public List<ProductModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            ProductData data = new ProductData();
+
+            return data.GetProducts();
         }
 
         // GET: api/Products/5
