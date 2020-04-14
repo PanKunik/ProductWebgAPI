@@ -76,5 +76,6 @@
     <Build Include="dbo\Tables\FeatureCombinationOfValue.sql" />
     <Build Include="dbo\Stored Procedures\spProduct_getAll.sql" />
     <Build Include="dbo\Stored Procedures\spProductLookup.sql" />
+    <Build Include="dbo\Stored Procedures\spVariantLookup.sql" />
   </ItemGroup>
 </Project>

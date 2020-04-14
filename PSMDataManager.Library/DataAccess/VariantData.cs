@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace PSMDataManager.Library.DataAccess
 {
-    public class ProductData
+    public class VariantData
     {
-        public List<ProductModel> GetProductById(int Id)
+        public List<VariantModel> GetVariantById(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Id = Id };
 
-            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookup", parameters, "DefaultConnection");
+            var variant = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookup", parameters, "DefaultConnection");
 
-            return product;
+            return variant;
         }
     }
 }
