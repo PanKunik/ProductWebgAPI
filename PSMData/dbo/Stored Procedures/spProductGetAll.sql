@@ -3,5 +3,6 @@ AS
 begin
 	set nocount on;
 
-	SELECT * FROM [dbo].[Product];
+	SELECT [Id], [Name], [Description], [CategoryId], [BrandId]
+	FROM [dbo].[Product];
 end

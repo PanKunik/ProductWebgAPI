@@ -25,9 +25,7 @@ namespace PSMDataManager.Library.DataAccess
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            dynamic parameters = new { };
-
-            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantGetAll", parameters, "DefaultConnection");
+            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantGetAll", new { }, "DefaultConnection");
 
             return variants;
         }
