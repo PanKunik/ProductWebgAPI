@@ -19,11 +19,11 @@ namespace PSMDataManager.Controllers
         }
 
         // GET: api/Products/5
-        public List<ProductModel> GetById(int id)
+        public ProductModel GetById(int id)
         {
             ProductData data = new ProductData();
 
-            return data.GetProductById(id);
+            return data.GetProductById(id).First();
         }
     }
 }

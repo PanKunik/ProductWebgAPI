@@ -18,11 +18,11 @@ namespace PSMDataManager.Controllers
         }
 
         // GET: api/Variants/5
-        public List<VariantModel> Get(int id)
+        public VariantModel Get(int id)
         {
             VariantData data = new VariantData();
 
-            return data.GetVariantById(id);
+            return data.GetVariantById(id).First();
         }
     }
 }
