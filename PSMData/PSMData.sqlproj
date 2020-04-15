@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\PSMData.publish.xml" />
+    <None Include="PublishLocations\PSMData%28Laptop).publish.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Brand.sql" />

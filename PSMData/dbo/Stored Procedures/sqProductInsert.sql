@@ -1,6 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[sqProductInsert]
-	@param1 int = 0,
-	@param2 int
+	@Name nvarchar(128),
+	@Description text,
+	@CategoryId int,
+	@BrandId int
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	set nocount on;
+
+	INSERT INTO [dbo].[Product] ([Name], [Description], [CategoryId], [BrandId])
+	VALUES (@Name, @Description, @CategoryId, @BrandId);
+END
