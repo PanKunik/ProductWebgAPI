@@ -9,10 +9,10 @@ using System.Web.Http;
 
 namespace PSMDataManager.Controllers
 {
-    [RoutePrefix("api/Products")]
-    public class ProductsController : ApiController
+    [RoutePrefix("api/Product")]
+    public class ProductController : ApiController
     {
-        // GET: api/Products
+        // GET: api/Product
         public List<ProductModel> Get()
         {
             ProductData data = new ProductData();
@@ -20,12 +20,21 @@ namespace PSMDataManager.Controllers
             return data.GetProducts();
         }
 
-        // GET: api/Products/5
+        // GET: api/Product/5
         public ProductModel GetById(int id)
         {
             ProductData data = new ProductData();
 
             return data.GetProductById(id).First();
+        }
+
+        // POST: api/Product
+
+        public void Post(ProductModel product)
+        {
+            ProductData data = new ProductData();
+
+            data.SaveProduct(product);
         }
     }
 }

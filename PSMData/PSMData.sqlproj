@@ -78,5 +78,6 @@
     <Build Include="dbo\Stored Procedures\spProductLookup.sql" />
     <Build Include="dbo\Stored Procedures\spVariantLookup.sql" />
     <Build Include="dbo\Stored Procedures\spVariantGetAll.sql" />
+    <Build Include="dbo\Stored Procedures\sqProductInsert.sql" />
   </ItemGroup>
 </Project>

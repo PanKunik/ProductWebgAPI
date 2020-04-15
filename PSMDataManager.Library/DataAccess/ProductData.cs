@@ -29,5 +29,12 @@ namespace PSMDataManager.Library.DataAccess
 
             return products;
         }
+
+        public void SaveProduct(ProductModel product)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            sql.SaveData<ProductModel>("dbo.sqProductInsert", product, "DefaultConnection");
+        }
     }
 }

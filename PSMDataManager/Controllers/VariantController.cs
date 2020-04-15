@@ -9,9 +9,9 @@ using System.Web.Http;
 
 namespace PSMDataManager.Controllers
 {
-    public class VariantsController : ApiController
+    public class VariantController : ApiController
     {
-        // GET: api/Variants
+        // GET: api/Variant
         public List<VariantModel> Get()
         {
             VariantData data = new VariantData();
@@ -19,7 +19,7 @@ namespace PSMDataManager.Controllers
             return data.GetVariants();
         }
 
-        // GET: api/Variants/5
+        // GET: api/Variant/5
         public VariantModel Get(int id)
         {
             VariantData data = new VariantData();
