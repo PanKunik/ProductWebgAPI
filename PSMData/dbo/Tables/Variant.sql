@@ -6,5 +6,7 @@
 	[Tax] DECIMAL (10,2) NOT NULL,
 	[InStock] INT NOT NULL,
 	[CreationDate] DATETIME2(7) NOT NULL DEFAULT getutcdate(),
-	[ModificationDate] DATETIME2(7) NOT NULL DEFAULT getutcdate()
+	[ModificationDate] DATETIME2(7) NOT NULL DEFAULT getutcdate(),
+
+	CONSTRAINT FK_Product FOREIGN KEY (ProductId) REFERENCES Product(Id)
 )
