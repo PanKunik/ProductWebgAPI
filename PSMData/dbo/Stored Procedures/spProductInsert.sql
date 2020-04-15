@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sqProductInsert]
+﻿CREATE PROCEDURE [dbo].[spProductInsert]
 	@Name nvarchar(128),
 	@Description text,
 	@CategoryId int,

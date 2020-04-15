@@ -48,7 +48,9 @@
     <Compile Include="DataAccess\VariantData.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
     <Compile Include="DataAccess\ProductData.cs" />
+    <Compile Include="Models\ProductDBModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\VariantDBModel.cs" />
     <Compile Include="Models\VariantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

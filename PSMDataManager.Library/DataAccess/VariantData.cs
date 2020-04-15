@@ -29,5 +29,13 @@ namespace PSMDataManager.Library.DataAccess
 
             return variants;
         }
+
+        // TODO: Pass in VariantModel
+        public void SaveVariant(VariantDBModel variant)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            sql.SaveData("dbo.spVariantInsert", variant, "DefaultConnection");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.DataAccess;
+﻿using Microsoft.Ajax.Utilities;
+using PSMDataManager.Library.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,15 @@ namespace PSMDataManager.Controllers
             VariantData data = new VariantData();
 
             return data.GetVariantById(id).First();
+        }
+
+        // POST: api/Variant
+        // TODO: Passing in VariantModel instead VariantDBModel
+        public void Post(VariantDBModel variant)
+        {
+            VariantData data = new VariantData();
+
+            data.SaveVariant(variant);
         }
     }
 }
