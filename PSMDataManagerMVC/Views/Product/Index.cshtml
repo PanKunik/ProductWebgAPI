@@ -1,11 +1,11 @@
-﻿@model List<PSMDataManagerMVC.Models.ProductViewModel>
+﻿@model PSMDataManagerMVC.Models.ProductViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="container">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Products)
     {
         {
             Html.RenderPartial("_ProductPartial", item);

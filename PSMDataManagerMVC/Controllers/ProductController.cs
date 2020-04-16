@@ -3,6 +3,7 @@ using PSMDataManagerMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,15 +11,12 @@ namespace PSMDataManagerMVC.Controllers
 {
     public class ProductController : Controller
     {
-        public ProductViewModel products;
-
         // GET: Product
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            APIHelper apiHelper = new APIHelper();
-            ProductEndpoint productEndpoint = new ProductEndpoint(apiHelper);
+            ProductViewModel products = new ProductViewModel(new ProductEndpoint(new APIHelper()));
 
-            products.products = productEndpoint.GetAll();
+            await products.LoadProducts();
 
             return View(products);
         }
