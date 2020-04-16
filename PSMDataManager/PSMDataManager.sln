@@ -9,6 +9,10 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PSMData", "..\PSMData\PSMDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMDataManager.Library", "..\PSMDataManager.Library\PSMDataManager.Library.csproj", "{BF17D599-DA34-49F2-BA77-7023E3B4DE28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMDataManagerMVC", "..\PSMDataManagerMVC\PSMDataManagerMVC.csproj", "{7D56FFB4-5DC3-4966-AF71-52BEFDC46D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMDataManagerMVC.Library", "..\PSMDataManagerMVC.Library\PSMDataManagerMVC.Library.csproj", "{22799CE4-5BBB-4A42-AEC4-5044371E00AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{BF17D599-DA34-49F2-BA77-7023E3B4DE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF17D599-DA34-49F2-BA77-7023E3B4DE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF17D599-DA34-49F2-BA77-7023E3B4DE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D56FFB4-5DC3-4966-AF71-52BEFDC46D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D56FFB4-5DC3-4966-AF71-52BEFDC46D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D56FFB4-5DC3-4966-AF71-52BEFDC46D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D56FFB4-5DC3-4966-AF71-52BEFDC46D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22799CE4-5BBB-4A42-AEC4-5044371E00AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22799CE4-5BBB-4A42-AEC4-5044371E00AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22799CE4-5BBB-4A42-AEC4-5044371E00AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22799CE4-5BBB-4A42-AEC4-5044371E00AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
