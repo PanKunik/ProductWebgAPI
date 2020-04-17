@@ -50,9 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\APIHelper.cs" />
+    <Compile Include="Api\BrandEndpoint.cs" />
+    <Compile Include="Api\CategoryEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
+    <Compile Include="Api\IBrandEndpoint.cs" />
+    <Compile Include="Api\ICategoryEndpoint.cs" />
     <Compile Include="Api\IProductEndpoint.cs" />
     <Compile Include="Api\ProductEndpoint.cs" />
+    <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

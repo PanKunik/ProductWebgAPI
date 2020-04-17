@@ -81,5 +81,7 @@
     <Build Include="dbo\Stored Procedures\spVariantGetAll.sql" />
     <Build Include="dbo\Stored Procedures\spProductInsert.sql" />
     <Build Include="dbo\Stored Procedures\spVariantInsert.sql" />
+    <Build Include="dbo\Stored Procedures\spCategoryGetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spBrandGetAll.sql" />
   </ItemGroup>
 </Project>

@@ -14,7 +14,10 @@
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-
+                @foreach (var item in Model.Products)
+                {
+                    @Html.Partial("_ProductPartial", item);
+                }
             </div>
         </div>
     </div>
@@ -25,7 +28,7 @@
                     Products by brands <i class="fa fa-chevron-down float-right"></i>
                 </h2>
             </div>
-            <!-- Load all brands -->
+            <!-- TODO: Load all brands -->
             <div class="row d-block m-0">
                 @for (int i = 0; i < 10; i++)
                 {
@@ -33,6 +36,7 @@
                         Button @(i+1)
                     </div>
                 }
+                @Html.Action("_CategoriesPartial")
             </div>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -48,7 +52,7 @@
                     Products by categories<i class="fa fa-chevron-down float-right"></i>
                 </h2>
             </div>
-            <!-- Load categories -->
+            <!-- TODO: Load categories -->
             <div class="row d-block m-0">
                 @for (int i = 0; i < 10; i++)
                 {

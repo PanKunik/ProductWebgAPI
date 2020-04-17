@@ -8,12 +8,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+// TODO: Make documentation on GitHub
+// TODO: Describe every project, every folder and every place
 namespace PSMDataManagerMVC.Controllers
 {
     public class ProductController : Controller
     {
-        public List<string> categories = new List<string>();
+        // TODO: Make one ViewModel for Products, Categories and Brands
         // GET: Product
         public async Task<ActionResult> Index()
         {
@@ -22,6 +23,15 @@ namespace PSMDataManagerMVC.Controllers
             await products.LoadProducts();
 
             return View(products);
+        }
+
+        public PartialViewResult _CategoriesPartial()
+        {
+            CategoriesViewModel cats = new CategoriesViewModel(new CategoryEndpoint(new APIHelper()));
+
+            cats.LoadCategories();
+
+            return PartialView(cats);
         }
     }
 }

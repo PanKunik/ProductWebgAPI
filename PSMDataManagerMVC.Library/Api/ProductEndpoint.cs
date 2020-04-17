@@ -32,5 +32,22 @@ namespace PSMDataManagerMVC.Library.Api
                 }
             }
         }
+
+        public async Task<ProductModel> GetById(int Id)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Product/{ Id }"))
+            {
+                if(response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<ProductModel>();
+
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

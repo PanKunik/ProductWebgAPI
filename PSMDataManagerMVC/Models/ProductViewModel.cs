@@ -31,5 +31,12 @@ namespace PSMDataManagerMVC.Models
             var products = await _productEndpoint.GetAll();
             Products = new List<ProductModel>(products);
         }
+
+        public async Task LoadProductById(int Id)
+        {
+            ProductModel products = await _productEndpoint.GetById(Id);
+            Products = new List<ProductModel>();
+            Products.Add(products);
+        }
     }
 }

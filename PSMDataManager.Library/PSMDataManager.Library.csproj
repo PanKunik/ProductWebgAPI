@@ -45,9 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\BrandData.cs" />
+    <Compile Include="DataAccess\CategoryData.cs" />
     <Compile Include="DataAccess\VariantData.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
     <Compile Include="DataAccess\ProductData.cs" />
+    <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ProductDBModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\VariantDBModel.cs" />

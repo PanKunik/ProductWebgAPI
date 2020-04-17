@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 
 namespace PSMDataManagerMVC.Library.Api
 {
-    public interface IProductEndpoint
+    public interface ICategoryEndpoint
     {
-        Task<List<ProductModel>> GetAll();
-        Task<ProductModel> GetById(int Id);
+        Task<List<CategoryModel>> GetAll();
     }
 }
