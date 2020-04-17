@@ -4,12 +4,65 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="container">
-    @foreach (var item in Model.Products)
-    {
-        {
-            Html.RenderPartial("_ProductPartial", item);
-        }
-    }
+<section class="accordion container-fluid p-0 m-0" id="accordionExample">
+    <div class="card">
+        <div class="card-header btn btn-link collapsed bg-darkred p-2 m-0 text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
+            <h2 class="w-100 text-white text-left">
+                All products <i class="fa fa-chevron-down float-right"></i>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-darkred p-2 m-0">
+            <div class="row p-0 m-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="headingTwo">
+                <h2 class="text-white text-left w-100">
+                    Products by brands <i class="fa fa-chevron-down float-right"></i>
+                </h2>
+            </div>
+            <!-- Load all brands -->
+            <div class="row d-block m-0">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <div class="btn btn-info float-left mr-2">
+                        Button @(i+1)
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-darkred p-2 m-0">
+            <div class="row p-0 m-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="headingThree">
+                <h2 class="text-decoration-none w-100 text-white text-left">
+                    Products by categories<i class="fa fa-chevron-down float-right"></i>
+                </h2>
+            </div>
+            <!-- Load categories -->
+            <div class="row d-block m-0">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <div class="btn btn-info float-left mr-2">
+                        Button @(i+1)
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+        </div>
+    </div>
 </section>
 
