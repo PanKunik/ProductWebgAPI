@@ -16,7 +16,8 @@ Simple project which contains all necessary elements to host WebAPI and API Clie
   This is API Client application project. Simple application made with .NET Framework MVC, which has controllers to collect data from the API using classes included in 'PSMDataManagerMVC.Library'. This project uses models from class library, but it has his own View model classes. These View models contain data for Views. They store data and have methods that connect to appropriate endpoints included in 'PSMDataMAnagerMVC.Library' (for e.g. `BrandViewModel` stores list of brands and has a method that connects to `IBrandEndpoint` to collect data from the API).
 
 ### PSMDataManagerMVC.Library
-  
+  This library contains all classes needed for connecting to the API application and models that matches data retrieved from the API. The `APIHelper` class is responsible for instantiating 'HttpClient' class and adding headers to the request. Every data model from the API has own class endpoint that connects to appropriate method in the API (for e.g. `IProductEndpoint` has methods that can connect to `GET` and `POST` methods in the API).
+
 ## Technologies used:
 * ASP.NET Framework MVC - for writing API client application,
 * ASP.NET Framework WebAPI - for writting web API application,
