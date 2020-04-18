@@ -1,6 +1,8 @@
 # ProductWebAPI
 
-Simple project which contains all necessary elements to host WebAPI and API Client (using .NET Framework MVC). It has been made using Visual Studio 2019 Community. This repository is divided into five projects, which are described down below.
+Simple project which contains all necessary elements to host WebAPI and API Client (using .NET Framework MVC). It has been made using Visual Studio 2019 Community. This repository is divided into five projects, which are described down below. The API and Api Client doesn't have any type of authentication.
+
+It has been made for learning purposes.
 
 ## Documentation
 ### PSMData
