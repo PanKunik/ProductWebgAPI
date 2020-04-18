@@ -276,6 +276,7 @@
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
     <Content Include="Views\Shared\_GeneralProductsPartial.cshtml" />
     <Content Include="Views\Shared\_BrandsPartial.cshtml" />
+    <Content Include="Views\Shared\_ProductsByBrandPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

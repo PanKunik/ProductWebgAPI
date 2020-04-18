@@ -8,5 +8,7 @@ namespace PSMDataManagerMVC.Library.Api
     {
         Task<List<ProductModel>> GetAll();
         Task<ProductModel> GetById(int Id);
+        Task<List<ProductModel>> GetByCategory(int Id);
+        Task<List<ProductModel>> GetByBrand(int Id);
     }
 }

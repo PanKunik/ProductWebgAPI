@@ -1,4 +1,6 @@
 ﻿@model PSMDataManagerMVC.Library.Models.BrandModel
-    <div class="btn btn-info">
-        @Model.Brand
-    </div>
+    @Ajax.ActionLink(Model.Brand, "LoadProductsOfBrand", new { brandId = Model.Id }, new AjaxOptions {
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "productsOfBrand"
+})

@@ -9,7 +9,6 @@
         <div class="card-header btn btn-link collapsed bg-darkred p-2 m-0 text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
             <h2 class="w-100 text-white text-left">
                 All products <i class="fa fa-chevron-down float-right"></i>
-                @Html.ActionLink("Load prods", "_LoadProducts")
             </h2>
         </div>
 
@@ -20,11 +19,8 @@
                     @Html.Partial("_ProductPartial", item);
                 }*@
 
-                @if (Model.Products.Products != null)
-                {
-                    @Html.Partial("_GeneralProductsPartial", Model.Products)
+                @Html.Partial("_GeneralProductsPartial", Model.Products)
                     
-                }
             </div>
         </div>
     </div>
@@ -37,18 +33,15 @@
             </div>
 
             <div class="row d-block m-0">
-                @if (Model.Brands.Brands != null)
+                @foreach (var item in Model.Brands.Brands)
                 {
-                    foreach (var item in Model.Brands.Brands)
-                    {
-                        @Html.Partial("_BrandsPartial", item)
-                    }
+                    @Html.Partial("_BrandsPartial", item)
                 }
             </div>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div class="card-body" id="productsOfBrand">
+                @Html.Partial("_GeneralProductsPartial", Model.Products)
             </div>
         </div>
     </div>
@@ -61,18 +54,15 @@
             </div>
 
             <div class="row d-block m-0">
-                @if (Model.Categories.Categories != null)
+                @foreach (var item in Model.Categories.Categories)
                 {
-                    foreach (var item in Model.Categories.Categories)
-                    {
-                        @Html.Partial("_CategoriesPartial", item)
-                    }
+                    @Html.Partial("_CategoriesPartial", item)
                 }
             </div>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div class="card-body" id="productsOfCategory">
+                @Html.Partial("_GeneralProductsPartial", Model.Products)
             </div>
         </div>
     </div>

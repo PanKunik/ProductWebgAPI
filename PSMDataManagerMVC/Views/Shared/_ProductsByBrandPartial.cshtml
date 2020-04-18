@@ -1,0 +1,11 @@
+﻿@model PSMDataManagerMVC.Models.ProductViewModel
+@if (Model != null)
+{
+    foreach (var item in Model.Products)
+    {
+    <div class="btn btn-block">
+        @item.Name
+        @item.Description
+    </div>
+    }
+}

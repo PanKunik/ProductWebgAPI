@@ -21,6 +21,28 @@ namespace PSMDataManager.Library.DataAccess
             return product;
         }
 
+        public List<ProductModel> GetProductByCategory(int Id)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            dynamic parameters = new { Id = Id };
+
+            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByCategory", parameters, "DefaultConnection");
+
+            return product;
+        }
+
+        public List<ProductModel> GetProductByBrand(int Id)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            dynamic parameters = new { Id = Id };
+
+            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByBrand", parameters, "DefaultConnection");
+
+            return product;
+        }
+
         public List<ProductModel> GetProducts()
         {
             SqlDataAccess sql = new SqlDataAccess();

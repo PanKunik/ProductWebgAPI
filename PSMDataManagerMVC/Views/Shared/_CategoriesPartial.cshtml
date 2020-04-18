@@ -1,4 +1,7 @@
 ﻿@model PSMDataManagerMVC.Library.Models.CategoryModel
-<div class="btn btn-info">
-    @Model.Category
-</div>
+@Ajax.ActionLink(Model.Category, "LoadProductsOfCategory", new { categoryId = Model.Id }, new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "productsOfCategory"
+})

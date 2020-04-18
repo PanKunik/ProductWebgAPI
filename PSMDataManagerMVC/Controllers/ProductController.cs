@@ -14,30 +14,34 @@ namespace PSMDataManagerMVC.Controllers
     public class ProductController : Controller
     {
 
-        static IndexViewModel data;
-
-        public ProductController()
-        {
-            if (data == null)
-                data = new IndexViewModel();
-        }
+        IndexViewModel data;
 
         // GET: Product
         public async Task<ActionResult> Index()
         {
+            data = new IndexViewModel();
+
+            await data.LoadData();
+
             return View(data);
         }
 
-        public async Task<RedirectToRouteResult> _LoadProducts()
+        public PartialViewResult LoadProductsOfCategory(int categoryId)
         {
-            await data.Products.LoadProducts();
+            data = new IndexViewModel();
+            var result = Task.Run(() => data.Products.LoadProductByCategory(categoryId));
+            result.Wait();
 
-            return RedirectToAction("Index");
+            return PartialView("_GeneralProductsPartial", data.Products);
         }
 
-        public PartialViewResult _CategoriesPartial()
+        public PartialViewResult LoadProductsOfBrand(int brandId)
         {
-            return PartialView();
+            data = new IndexViewModel();
+            var result = Task.Run(() => data.Products.LoadProductByBrand(brandId));
+            result.Wait();
+
+            return PartialView("_GeneralProductsPartial", data.Products);
         }
     }
 }
