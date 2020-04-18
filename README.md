@@ -18,7 +18,7 @@ Simple project which contains all necessary elements to host WebAPI and API Clie
 ### PSMDataManagerMVC.Library
   
 ## Technologies used:
-*ASP.NET Framework MVC - for writing API client application,
-*ASP.NET Framework WebAPI - for writting web API application,
-*Class Library (.NET Framework) - for separating data access classes and models used in data access, 
-*T-SQL - for creating tables and writing stored procedures
+* ASP.NET Framework MVC - for writing API client application,
+* ASP.NET Framework WebAPI - for writting web API application,
+* Class Library (.NET Framework) - for separating data access classes and models used in data access, 
+* T-SQL - for creating tables and writing stored procedures
