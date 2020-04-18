@@ -126,7 +126,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoriesViewModel.cs" />
+    <Compile Include="Models\BrandViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -272,6 +274,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_ProductPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
+    <Content Include="Views\Shared\_GeneralProductsPartial.cshtml" />
+    <Content Include="Views\Shared\_BrandsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

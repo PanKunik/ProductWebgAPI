@@ -1,4 +1,4 @@
-﻿@model PSMDataManagerMVC.Models.ProductViewModel
+﻿@model PSMDataManagerMVC.Models.IndexViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,14 +9,21 @@
         <div class="card-header btn btn-link collapsed bg-darkred p-2 m-0 text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
             <h2 class="w-100 text-white text-left">
                 All products <i class="fa fa-chevron-down float-right"></i>
+                @Html.ActionLink("Load prods", "_LoadProducts")
             </h2>
         </div>
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
-                @foreach (var item in Model.Products)
+            <div class="card-body" id="loadProds">
+                @*@foreach (var item in Model.Products)
                 {
                     @Html.Partial("_ProductPartial", item);
+                }*@
+
+                @if (Model.Products.Products != null)
+                {
+                    @Html.Partial("_GeneralProductsPartial", Model.Products)
+                    
                 }
             </div>
         </div>
@@ -28,15 +35,15 @@
                     Products by brands <i class="fa fa-chevron-down float-right"></i>
                 </h2>
             </div>
-            <!-- TODO: Load all brands -->
+
             <div class="row d-block m-0">
-                @for (int i = 0; i < 10; i++)
+                @if (Model.Brands.Brands != null)
                 {
-                    <div class="btn btn-info float-left mr-2">
-                        Button @(i+1)
-                    </div>
+                    foreach (var item in Model.Brands.Brands)
+                    {
+                        @Html.Partial("_BrandsPartial", item)
+                    }
                 }
-                @Html.Action("_CategoriesPartial")
             </div>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -52,13 +59,14 @@
                     Products by categories<i class="fa fa-chevron-down float-right"></i>
                 </h2>
             </div>
-            <!-- TODO: Load categories -->
+
             <div class="row d-block m-0">
-                @for (int i = 0; i < 10; i++)
+                @if (Model.Categories.Categories != null)
                 {
-                    <div class="btn btn-info float-left mr-2">
-                        Button @(i+1)
-                    </div>
+                    foreach (var item in Model.Categories.Categories)
+                    {
+                        @Html.Partial("_CategoriesPartial", item)
+                    }
                 }
             </div>
         </div>

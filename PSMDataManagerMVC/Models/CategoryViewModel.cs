@@ -8,7 +8,7 @@ using System.Web;
 
 namespace PSMDataManagerMVC.Models
 {
-    public class CategoriesViewModel
+    public class CategoryViewModel
     {
         private ICategoryEndpoint _categoryEndpoint;
 
@@ -20,7 +20,7 @@ namespace PSMDataManagerMVC.Models
             set { _categories = value; }
         }
 
-        public CategoriesViewModel(ICategoryEndpoint categoryEndpoint)
+        public CategoryViewModel(ICategoryEndpoint categoryEndpoint)
         {
             _categoryEndpoint = categoryEndpoint;
         }

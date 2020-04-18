@@ -1,0 +1,8 @@
+﻿@model PSMDataManagerMVC.Models.ProductViewModel
+    @foreach (var item in Model.Products)
+    {
+        <div class="btn btn-block">
+            @item.Name
+            @item.Description
+        </div>
+    }

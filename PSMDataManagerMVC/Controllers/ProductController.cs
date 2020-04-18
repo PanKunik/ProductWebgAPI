@@ -13,24 +13,31 @@ namespace PSMDataManagerMVC.Controllers
 {
     public class ProductController : Controller
     {
-        // TODO: Make one ViewModel for Products, Categories and Brands
+
+        static IndexViewModel data;
+
+        public ProductController()
+        {
+            if (data == null)
+                data = new IndexViewModel();
+        }
+
         // GET: Product
         public async Task<ActionResult> Index()
         {
-            ProductViewModel products = new ProductViewModel(new ProductEndpoint(new APIHelper()));
+            return View(data);
+        }
 
-            await products.LoadProducts();
+        public async Task<RedirectToRouteResult> _LoadProducts()
+        {
+            await data.Products.LoadProducts();
 
-            return View(products);
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult _CategoriesPartial()
         {
-            CategoriesViewModel cats = new CategoriesViewModel(new CategoryEndpoint(new APIHelper()));
-
-            cats.LoadCategories();
-
-            return PartialView(cats);
+            return PartialView();
         }
     }
 }
