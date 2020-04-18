@@ -30,8 +30,7 @@ namespace PSMDataManager.Library.DataAccess
             return products;
         }
 
-        // TODO: Pass in ProductModel
-        public void SaveProduct(ProductDBModel product)
+        public void SaveProduct(ProductModel product)
         {
             SqlDataAccess sql = new SqlDataAccess();
 

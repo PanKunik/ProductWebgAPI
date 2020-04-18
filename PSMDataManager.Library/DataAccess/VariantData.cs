@@ -30,8 +30,7 @@ namespace PSMDataManager.Library.DataAccess
             return variants;
         }
 
-        // TODO: Pass in VariantModel
-        public void SaveVariant(VariantDBModel variant)
+        public void SaveVariant(VariantModel variant)
         {
             SqlDataAccess sql = new SqlDataAccess();
 

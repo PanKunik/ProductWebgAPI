@@ -29,8 +29,7 @@ namespace PSMDataManager.Controllers
         }
 
         // POST: api/Product
-        // TODO: Passing in ProductModel instead ProductDBModel
-        public void Post(ProductDBModel product)
+        public void Post(ProductModel product)
         {
             ProductData data = new ProductData();
 

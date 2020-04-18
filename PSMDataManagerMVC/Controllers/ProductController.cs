@@ -8,8 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-// TODO: Make documentation on GitHub
-// TODO: Describe every project, every folder and every place
+
 namespace PSMDataManagerMVC.Controllers
 {
     public class ProductController : Controller

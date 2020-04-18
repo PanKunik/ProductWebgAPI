@@ -29,8 +29,7 @@ namespace PSMDataManager.Controllers
         }
 
         // POST: api/Variant
-        // TODO: Passing in VariantModel instead VariantDBModel
-        public void Post(VariantDBModel variant)
+        public void Post(VariantModel variant)
         {
             VariantData data = new VariantData();
 
