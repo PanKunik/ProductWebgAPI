@@ -50,5 +50,10 @@ namespace PSMDataManagerMVC.Models
             List<ProductModel> products = await _productEndpoint.GetByBrand(Id);
             Products = new List<ProductModel>(products);
         }
+
+        public async Task InsertProduct(ProductModel newProduct)
+        {
+            await _productEndpoint.InsertNewProduct(newProduct);
+        }
     }
 }

@@ -20,8 +20,8 @@ namespace PSMDataManagerMVC.Controllers
         public async Task<ActionResult> Index()
         {
             data = new IndexViewModel();
-
-            await data.LoadData();
+            await data.Brands.LoadBrands();
+            await data.Categories.LoadCategories();
 
             return View(data);
         }
@@ -29,6 +29,7 @@ namespace PSMDataManagerMVC.Controllers
         public PartialViewResult LoadProductsOfCategory(int categoryId)
         {
             data = new IndexViewModel();
+
             var result = Task.Run(() => data.Products.LoadProductByCategory(categoryId));
             result.Wait();
 
@@ -38,10 +39,28 @@ namespace PSMDataManagerMVC.Controllers
         public PartialViewResult LoadProductsOfBrand(int brandId)
         {
             data = new IndexViewModel();
+
             var result = Task.Run(() => data.Products.LoadProductByBrand(brandId));
             result.Wait();
 
             return PartialView("_GeneralProductsPartial", data.Products);
+        }
+
+        public PartialViewResult LoadAllProducts()
+        {
+            data = new IndexViewModel();
+
+            var result = Task.Run(() => data.Products.LoadProducts());
+            result.Wait();
+
+            return PartialView("_GeneralProductsPartial", data.Products);
+        }
+
+        public async Task AddNewProduct(ProductModel s)
+        {
+            data = new IndexViewModel();
+
+            await data.Products.InsertProduct(s);
         }
     }
 }

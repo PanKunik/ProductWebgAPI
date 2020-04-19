@@ -10,5 +10,6 @@ namespace PSMDataManagerMVC.Library.Api
         Task<ProductModel> GetById(int Id);
         Task<List<ProductModel>> GetByCategory(int Id);
         Task<List<ProductModel>> GetByBrand(int Id);
+        Task InsertNewProduct(ProductModel newProduct);
     }
 }

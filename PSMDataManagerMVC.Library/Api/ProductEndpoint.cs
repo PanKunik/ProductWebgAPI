@@ -83,5 +83,20 @@ namespace PSMDataManagerMVC.Library.Api
                 }
             }
         }
+
+        public async Task InsertNewProduct(ProductModel newProduct)
+        {
+            using(HttpResponseMessage response = await _apiHelper.ApiClient.PostAsync<ProductModel>("/api/Product", newProduct, null))
+            {
+                if(response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

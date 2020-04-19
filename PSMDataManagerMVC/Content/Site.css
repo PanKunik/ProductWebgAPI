@@ -26,3 +26,12 @@ textarea {
 .bg-darkred {
     background-color: darkred;
 }
+
+.plus {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
