@@ -1,8 +1,8 @@
 ﻿@model PSMDataManagerMVC.Models.ProductViewModel
     @foreach (var item in Model.Products)
     {
-        <div class="btn btn-block">
-            @item.Name
-            @item.Description
+        <div class="btn btn-danger btn-lg float-left mr-1 mb-1">
+            <div class="row">@item.Name</div>
+            <div class="row text-secondary">@item.Description</div>
         </div>
     }
