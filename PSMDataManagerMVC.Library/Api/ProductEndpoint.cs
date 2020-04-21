@@ -86,7 +86,7 @@ namespace PSMDataManagerMVC.Library.Api
 
         public async Task InsertNewProduct(ProductModel newProduct)
         {
-            using(HttpResponseMessage response = await _apiHelper.ApiClient.PostAsync<ProductModel>("/api/Product", newProduct, null))
+            using(HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync<ProductModel>("/api/Product", newProduct))
             {
                 if(response.IsSuccessStatusCode)
                 {

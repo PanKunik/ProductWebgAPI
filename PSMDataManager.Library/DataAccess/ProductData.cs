@@ -56,7 +56,9 @@ namespace PSMDataManager.Library.DataAccess
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            sql.SaveData("dbo.spProductInsert", product, "DefaultConnection");
+            dynamic parameters = new { Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId };
+
+            sql.SaveData<dynamic>("dbo.spProductInsert", parameters, "DefaultConnection");
         }
     }
 }
