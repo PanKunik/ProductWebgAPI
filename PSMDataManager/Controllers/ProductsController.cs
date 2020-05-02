@@ -9,9 +9,10 @@ using System.Web.Http;
 
 namespace PSMDataManager.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductsController : ApiController
     {
-        // GET: api/Product
+        // GET: api/Products
+        [HttpGet]
         public List<ProductModel> Get()
         {
             ProductData data = new ProductData();
@@ -19,7 +20,8 @@ namespace PSMDataManager.Controllers
             return data.GetProducts();
         }
 
-        // GET: api/Product/5
+        // GET: api/Products/id
+        [HttpGet]
         public ProductModel GetById(int id)
         {
             ProductData data = new ProductData();
@@ -27,8 +29,9 @@ namespace PSMDataManager.Controllers
             return data.GetProductById(id).First();
         }
 
-        [Route("api/Product/categoryId/{id}")]
-        // GET: api/Product/categoryId/id
+        // GET: api/Products/categoryId/id
+        [HttpGet]
+        [Route("api/Products/category/{id}")]
         public List<ProductModel> GetByCategoryId(int id)
         {
             ProductData data = new ProductData();
@@ -36,8 +39,9 @@ namespace PSMDataManager.Controllers
             return data.GetProductByCategory(id);
         }
 
-        [Route("api/Product/brandId/{id}")]
-        // GET: api/Product/categoryId/id
+        // GET: api/Products/categoryId/id
+        [HttpGet]
+        [Route("api/Products/brand/{id}")]
         public List<ProductModel> GetByBrandId(int id)
         {
             ProductData data = new ProductData();
@@ -45,7 +49,18 @@ namespace PSMDataManager.Controllers
             return data.GetProductByBrand(id);
         }
 
-        // POST: api/Product
+        // GET: api/Products/search/name
+        [HttpGet]
+        [Route("api/Products/search/{name}")]
+        public List<ProductModel> SearchForProducts(string keyword)
+        {
+            ProductData data = new ProductData();
+
+            return data.SearchProducts(keyword);
+        }
+
+        // POST: api/Products
+        [HttpPost]
         public void Post(ProductModel product)
         {
             ProductData data = new ProductData();

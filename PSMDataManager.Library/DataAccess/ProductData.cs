@@ -43,6 +43,17 @@ namespace PSMDataManager.Library.DataAccess
             return product;
         }
 
+        public List<ProductModel> SearchProducts(string Keyword)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            dynamic parameters = new { Keyword = Keyword };
+
+            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByName", parameters, "DefaultConnection");
+
+            return product;
+        }
+
         public List<ProductModel> GetProducts()
         {
             SqlDataAccess sql = new SqlDataAccess();

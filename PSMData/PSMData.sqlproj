@@ -93,5 +93,6 @@
     <Build Include="dbo\Stored Procedures\spCategoryInsert.sql" />
     <Build Include="dbo\Stored Procedures\spCategoryUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spCategoryDeleteById.sql" />
+    <Build Include="dbo\Stored Procedures\spProductLookupByName.sql" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Http;
 using System.Web.UI.WebControls;
 
@@ -28,6 +29,16 @@ namespace PSMDataManager.Controllers
             CategoryData data = new CategoryData();
 
             return data.GetCategoryById(id);
+        }
+
+        // GET: api/Categories/id/products
+        [HttpGet]
+        [Route("api/Categories/{id}/products")]
+        public IEnumerable<string> GetProductsOfCategory(int id)
+        {
+            //CategoryData data = new CategoryData();
+
+            return new string[] { "val1", "val2", "val3" };
         }
 
         // POST: api/Categories
