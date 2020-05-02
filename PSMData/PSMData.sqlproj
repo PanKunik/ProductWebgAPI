@@ -85,5 +85,9 @@
     <Build Include="dbo\Stored Procedures\spBrandGetAll.sql" />
     <Build Include="dbo\Stored Procedures\spProductLookupByCategory.sql" />
     <Build Include="dbo\Stored Procedures\spProductLookupByBrand.sql" />
+    <Build Include="dbo\Stored Procedures\spBrandLookup.sql" />
+    <Build Include="dbo\Stored Procedures\spBrandDeleteById.sql" />
+    <Build Include="dbo\Stored Procedures\spBrandUpdateById.sql" />
+    <Build Include="dbo\Stored Procedures\spBrandInsert.sql" />
   </ItemGroup>
 </Project>

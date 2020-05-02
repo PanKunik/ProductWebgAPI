@@ -18,5 +18,37 @@ namespace PSMDataManager.Controllers
 
             return data.GetBrands();
         }
+
+        // GET: /api/Brand/id
+        public BrandModel Get(int id)
+        {
+            BrandData data = new BrandData();
+
+            return data.GetBrandById(id);
+        }
+
+        // POST: api/Brand
+        public void Post([FromBody]string brand)
+        {
+            BrandData data = new BrandData();
+
+            data.SaveBrand(brand);
+        }
+
+        // PUT: api/Brand/id
+        public void Put(int id, [FromBody]string brand)
+        {
+            BrandData data = new BrandData();
+
+            data.UpdateBrandById(id, brand);
+        }
+
+        // DELETE: api/Brand/id
+        public void Delete(int id)
+        {
+            BrandData data = new BrandData();
+
+            data.DeleteBrandById(id);
+        }
     }
 }
