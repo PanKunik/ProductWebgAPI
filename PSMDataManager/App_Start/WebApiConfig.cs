@@ -15,9 +15,10 @@ namespace PSMDataManager
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "DefaultAPI",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional },
+                constraints: new { id = @"\d*"}
             );
         }
     }

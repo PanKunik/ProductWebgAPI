@@ -89,5 +89,9 @@
     <Build Include="dbo\Stored Procedures\spBrandDeleteById.sql" />
     <Build Include="dbo\Stored Procedures\spBrandUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spBrandInsert.sql" />
+    <Build Include="dbo\Stored Procedures\spCategoryLookup.sql" />
+    <Build Include="dbo\Stored Procedures\spCategoryInsert.sql" />
+    <Build Include="dbo\Stored Procedures\spCategoryUpdateById.sql" />
+    <Build Include="dbo\Stored Procedures\spCategoryDeleteById.sql" />
   </ItemGroup>
 </Project>

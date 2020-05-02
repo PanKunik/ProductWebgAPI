@@ -18,5 +18,43 @@ namespace PSMDataManager.Library.DataAccess
 
             return categories;
         }
+
+        public CategoryModel GetCategoryById(int id)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id };
+
+            var categories = sql.LoadData<CategoryModel, dynamic>("dbo.spCategoryLookup", parameters, "DefaultConnection");
+
+            return categories.FirstOrDefault();
+        }
+
+        public void SaveCategory(string category)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Category = category };
+
+            sql.SaveData<dynamic>("dbo.spCategoryInsert", parameters, "DefaultConnection");
+        }
+
+        public void UpdateCategoryById(int id, string category)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id, Category = category };
+
+            sql.UpdateData<dynamic>("dbo.spCategoryUpdateById", parameters, "DefaultConnection");
+        }
+
+        public void DeleteCategoryById(int id)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id };
+
+            sql.DeleteData<dynamic>("dbo.spCategoryDeleteById", parameters, "DefaultConnection");
+        }
     }
 }

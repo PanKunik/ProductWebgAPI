@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace PSMDataManager.Controllers
 {
-    public class BrandController : ApiController
+    public class BrandsController : ApiController
     {
-        // GET: /api/Brand
+        // GET: /api/Brands
+        [HttpGet]
         public List<BrandModel> Get()
         {
             BrandData data = new BrandData();
@@ -19,7 +19,8 @@ namespace PSMDataManager.Controllers
             return data.GetBrands();
         }
 
-        // GET: /api/Brand/id
+        // GET: /api/Brands/id
+        [HttpGet]
         public BrandModel Get(int id)
         {
             BrandData data = new BrandData();
@@ -27,7 +28,8 @@ namespace PSMDataManager.Controllers
             return data.GetBrandById(id);
         }
 
-        // POST: api/Brand
+        // POST: api/Brands
+        [HttpPost]
         public void Post([FromBody]string brand)
         {
             BrandData data = new BrandData();
@@ -35,7 +37,8 @@ namespace PSMDataManager.Controllers
             data.SaveBrand(brand);
         }
 
-        // PUT: api/Brand/id
+        // PUT: api/Brands/id
+        [HttpPut]
         public void Put(int id, [FromBody]string brand)
         {
             BrandData data = new BrandData();
@@ -43,7 +46,8 @@ namespace PSMDataManager.Controllers
             data.UpdateBrandById(id, brand);
         }
 
-        // DELETE: api/Brand/id
+        // DELETE: api/Brands/id
+        [HttpDelete]
         public void Delete(int id)
         {
             BrandData data = new BrandData();
