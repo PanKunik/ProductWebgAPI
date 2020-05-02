@@ -36,5 +36,14 @@ namespace PSMDataManager.Library.DataAccess
 
             sql.SaveData("dbo.spVariantInsert", variant, "DefaultConnection");
         }
+
+        public void UpdateVariant(int id, VariantModel variant)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id, ProductId = variant.ProductId, BasePrice = variant.BasePrice, Tax = variant.Tax, InStock = variant.InStock };
+
+            sql.UpdateData("dbo.spVariantUpdateById", parameters, "DefaultConnection");
+        }
     }
 }

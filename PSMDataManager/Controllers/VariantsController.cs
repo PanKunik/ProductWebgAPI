@@ -10,9 +10,10 @@ using System.Web.Http;
 
 namespace PSMDataManager.Controllers
 {
-    public class VariantController : ApiController
+    public class VariantsController : ApiController
     {
-        // GET: api/Variant
+        // GET: api/Variants
+        [HttpGet]
         public List<VariantModel> Get()
         {
             VariantData data = new VariantData();
@@ -20,7 +21,8 @@ namespace PSMDataManager.Controllers
             return data.GetVariants();
         }
 
-        // GET: api/Variant/5
+        // GET: api/Variants/id
+        [HttpGet]
         public VariantModel Get(int id)
         {
             VariantData data = new VariantData();
@@ -28,12 +30,29 @@ namespace PSMDataManager.Controllers
             return data.GetVariantById(id).First();
         }
 
-        // POST: api/Variant
+        // POST: api/Variants
+        [HttpPost]
         public void Post(VariantModel variant)
         {
             VariantData data = new VariantData();
 
             data.SaveVariant(variant);
+        }
+
+        // PUT: api/Variants/id
+        [HttpPut]
+        public void Put(int id, [FromBody]VariantModel variant)
+        {
+            VariantData data = new VariantData();
+
+            data.UpdateVariant(id, variant);
+        }
+
+        // DELETE: api/Variants/id
+        [HttpDelete]
+        public void Delete(int id)
+        {
+
         }
     }
 }
