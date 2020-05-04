@@ -10,55 +10,55 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class ProductData
     {
-        public List<ProductModel> GetProductById(int Id)
+        public List<ProductDBModel> GetProductById(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Id = Id };
 
-            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookup", parameters, "DefaultConnection");
+            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookup", parameters, "DefaultConnection");
 
             return product;
         }
 
-        public List<ProductModel> GetProductByCategory(int Id)
+        public List<ProductDBModel> GetProductByCategory(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Id = Id };
 
-            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByCategory", parameters, "DefaultConnection");
+            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByCategory", parameters, "DefaultConnection");
 
             return product;
         }
 
-        public List<ProductModel> GetProductByBrand(int Id)
+        public List<ProductDBModel> GetProductByBrand(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Id = Id };
 
-            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByBrand", parameters, "DefaultConnection");
+            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByBrand", parameters, "DefaultConnection");
 
             return product;
         }
 
-        public List<ProductModel> SearchProducts(string Keyword)
+        public List<ProductDBModel> SearchProducts(string Keyword)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Keyword = Keyword };
 
-            var product = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookupByName", parameters, "DefaultConnection");
+            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByName", parameters, "DefaultConnection");
 
             return product;
         }
 
-        public List<ProductModel> GetProducts()
+        public List<ProductDBModel> GetProducts()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var products = sql.LoadData<ProductModel, dynamic>("dbo.spProductGetAll", new { }, "DefaultConnection");
+            var products = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductGetAll", new { }, "DefaultConnection");
 
             return products;
         }
@@ -67,9 +67,9 @@ namespace PSMDataManager.Library.DataAccess
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            dynamic parameters = new { Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId };
+            // dynamic parameters = new { Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId };
 
-            sql.SaveData<dynamic>("dbo.spProductInsert", parameters, "DefaultConnection");
+            sql.SaveData<dynamic>("dbo.spProductInsert", product, "DefaultConnection");
         }
     }
 }

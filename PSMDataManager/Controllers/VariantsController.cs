@@ -14,7 +14,7 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Variants
         [HttpGet]
-        public List<VariantModel> Get()
+        public List<VariantDBModel> Get()
         {
             VariantData data = new VariantData();
 
@@ -23,7 +23,7 @@ namespace PSMDataManager.Controllers
 
         // GET: api/Variants/id
         [HttpGet]
-        public VariantModel Get(int id)
+        public VariantDBModel Get(int id)
         {
             VariantData data = new VariantData();
 

@@ -13,7 +13,7 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Products
         [HttpGet]
-        public List<ProductModel> Get()
+        public List<ProductDBModel> Get()
         {
             ProductData data = new ProductData();
 
@@ -22,7 +22,7 @@ namespace PSMDataManager.Controllers
 
         // GET: api/Products/id
         [HttpGet]
-        public ProductModel GetById(int id)
+        public ProductDBModel GetById(int id)
         {
             ProductData data = new ProductData();
 
@@ -32,7 +32,7 @@ namespace PSMDataManager.Controllers
         // GET: api/Products/categoryId/id
         [HttpGet]
         [Route("api/Products/category/{id}")]
-        public List<ProductModel> GetByCategoryId(int id)
+        public List<ProductDBModel> GetByCategoryId(int id)
         {
             ProductData data = new ProductData();
 
@@ -42,7 +42,7 @@ namespace PSMDataManager.Controllers
         // GET: api/Products/categoryId/id
         [HttpGet]
         [Route("api/Products/brand/{id}")]
-        public List<ProductModel> GetByBrandId(int id)
+        public List<ProductDBModel> GetByBrandId(int id)
         {
             ProductData data = new ProductData();
 
@@ -52,7 +52,7 @@ namespace PSMDataManager.Controllers
         // GET: api/Products/search/name
         [HttpGet]
         [Route("api/Products/search/{name}")]
-        public List<ProductModel> SearchForProducts(string keyword)
+        public List<ProductDBModel> SearchForProducts(string keyword)
         {
             ProductData data = new ProductData();
 
