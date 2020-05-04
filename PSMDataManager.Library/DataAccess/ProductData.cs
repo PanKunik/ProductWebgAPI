@@ -67,9 +67,16 @@ namespace PSMDataManager.Library.DataAccess
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            // dynamic parameters = new { Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId };
-
             sql.SaveData<dynamic>("dbo.spProductInsert", product, "DefaultConnection");
+        }
+
+        public void UpdateProductById(int id, ProductModel product)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id, Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId }; 
+
+            sql.UpdateData<dynamic>("dbo.spProductUpdateById", parameters, "DefaultConnection");
         }
     }
 }
