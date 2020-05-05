@@ -19,7 +19,7 @@ namespace PSMDataManagerMVC.Library.Api
 
         public async Task<List<BrandModel>> GetAll()
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Brand"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/brands"))
             {
                 if (response.IsSuccessStatusCode)
                 {

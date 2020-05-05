@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace PSMDataManagerMVC.Controllers
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
 
         IndexViewModel data;

@@ -19,7 +19,7 @@ namespace PSMDataManagerMVC.Library.Api
 
         public async Task<List<CategoryModel>> GetAll()
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Category"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/categories"))
             {
                 if (response.IsSuccessStatusCode)
                 {
