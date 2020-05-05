@@ -30,6 +30,33 @@ namespace PSMDataManager.Library.DataAccess
             return variants;
         }
 
+        public List<VariantModel> GetVariantsOfProduct(int productId)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { ProductId = productId };
+
+            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookupByProduct", parameters, "DefaultConnection");
+
+            return variants;
+        }
+
+        public List<VariantModel> GetVariantsInPriceRange(int minPrice, int? maxPrice)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            if(maxPrice == null)
+            {
+                maxPrice = int.MaxValue;
+            }
+            
+            var parameters = new { MinPrice = minPrice, MaxPrice = maxPrice };
+
+            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookupByPrice", parameters, "DefaultConnection");
+
+            return variants;
+        }
+
         public void SaveVariant(VariantModel variant)
         {
             SqlDataAccess sql = new SqlDataAccess();

@@ -96,5 +96,7 @@
     <Build Include="dbo\Stored Procedures\spProductLookupByName.sql" />
     <Build Include="dbo\Stored Procedures\spVariantUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spProductUpdateById.sql" />
+    <Build Include="dbo\Stored Procedures\spVariantLookupByPrice.sql" />
+    <Build Include="dbo\Stored Procedures\spVariantLookupByProduct.sql" />
   </ItemGroup>
 </Project>
