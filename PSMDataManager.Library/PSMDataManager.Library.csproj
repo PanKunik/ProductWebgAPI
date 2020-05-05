@@ -52,7 +52,9 @@
     <Compile Include="DataAccess\ProductData.cs" />
     <Compile Include="Models\BrandModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\ProductDBModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\VariantDBModel.cs" />
     <Compile Include="Models\VariantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

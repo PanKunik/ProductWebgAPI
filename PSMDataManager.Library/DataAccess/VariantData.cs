@@ -10,22 +10,22 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class VariantData
     {
-        public List<VariantModel> GetVariantById(int Id)
+        public List<VariantDBModel> GetVariantById(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             dynamic parameters = new { Id = Id };
 
-            var variant = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookup", parameters, "DefaultConnection");
+            var variant = sql.LoadData<VariantDBModel, dynamic>("dbo.spVariantLookup", parameters, "DefaultConnection");
 
             return variant;
         }
 
-        public List<VariantModel> GetVariants()
+        public List<VariantDBModel> GetVariants()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantGetAll", new { }, "DefaultConnection");
+            var variants = sql.LoadData<VariantDBModel, dynamic>("dbo.spVariantGetAll", new { }, "DefaultConnection");
 
             return variants;
         }
@@ -41,7 +41,7 @@ namespace PSMDataManager.Library.DataAccess
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var parameters = new { Id = id, ProductId = variant.ProductId, BasePrice = variant.BasePrice, Tax = variant.Tax, InStock = variant.InStock };
+            var parameters = new { Id = id, ProductId = variant.ProductId, BasePrice = variant.BasePrice, Tax = variant.Tax, InStock = variant.InStock }; 
 
             sql.UpdateData("dbo.spVariantUpdateById", parameters, "DefaultConnection");
         }
