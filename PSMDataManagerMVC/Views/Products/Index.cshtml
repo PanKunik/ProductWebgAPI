@@ -8,12 +8,19 @@
     <div class="card">
         <div class="card-header btn btn-link collapsed bg-darkred p-2 m-0 text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace", data-ajax-udpate="#loadProds" href="/Product/LoadAllProducts">
             <h2 class="w-100 text-white text-left">
-                All products <i class="fa fa-chevron-down float-right"></i>
+                @Ajax.ActionLink("All products", "LoadAllProducts", new { }, new AjaxOptions
+                {
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "loadProds"
+                }, new { @class = "btn btn-info btn-lg" })
+                <!-- All products <i class="fa fa-chevron-down float-right"></i> -->
             </h2>
         </div>
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body" id="loadProds">  
+            <div class="card-body" id="loadProds">
+                
             </div>
         </div>
     </div>
