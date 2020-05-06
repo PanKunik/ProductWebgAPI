@@ -43,7 +43,7 @@ namespace PSMDataManager.Controllers
         // GET: api/variants/price/{minPrice}/{maxPrice}
         [HttpGet]
         [Route("api/variants/price")]
-        public List<VariantModel> GetVariantsInPriceRange(int minPrice, int? maxPrice = null)
+        public List<VariantModel> GetVariantsInPriceRange(int? minPrice = null, int? maxPrice = null)
         {
             VariantData data = new VariantData();
 

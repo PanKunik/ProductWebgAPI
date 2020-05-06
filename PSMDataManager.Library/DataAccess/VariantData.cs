@@ -41,13 +41,18 @@ namespace PSMDataManager.Library.DataAccess
             return variants;
         }
 
-        public List<VariantModel> GetVariantsInPriceRange(int minPrice, int? maxPrice)
+        public List<VariantModel> GetVariantsInPriceRange(int? minPrice, int? maxPrice)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             if(maxPrice == null)
             {
                 maxPrice = int.MaxValue;
+            }
+
+            if(minPrice == null)
+            {
+                minPrice = 0;
             }
             
             var parameters = new { MinPrice = minPrice, MaxPrice = maxPrice };
