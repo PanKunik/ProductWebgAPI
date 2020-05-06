@@ -10,6 +10,30 @@ It has been made for learning purposes.
 
 ### PSMDataManager
   This is WebAPI project with Swagger addon. It has GET and POST methods to collect data from Database. All models used in this project are in the 'PSMDataManager.Library' to separate business logic from front-end application. Every controller retrieves data from a different table from database (for e.g. The `ProductsController` takes data from the `Product` table). 
+  
+#### Routing
+In this API routes allow you to insert new, edit exisiting and retrieve data from tables. These operations are executed by using REST methods like GET, POST, PUT and DELETE. 
+##### Products routes
+Retrieving all existing products or insert new one (with data in body):
+```
+http://localhost:44339/api/products
+```
+Retrieve one specified product or delete one. If you add data in body you can edit the product. For e.g. to GET one product with Id = 1 you can use:
+```
+http://localhost:44339/api/products/1
+```
+You can search for all products whose name or description contains given string. For e.g. to GET all products that contains "milk" you can use:
+```
+http://localhost:44339/api/products/search/milk
+```
+To get all products that are from specified category or from specified manufacturer you can use:
+```
+http://localhost:44339/api/products/brand/lubella
+```
+or
+```
+http://localhost:44339/api/products/categories/pasta
+```
 
 ### PSMDataManager.Library
   This project includes basic data access class `SqlDataAccess` and classes that load and save data in a database. It also contains models used in WebAPI application, because the API doesn't need separate models. It operates on complete data retrieved from the database.
