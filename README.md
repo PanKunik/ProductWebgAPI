@@ -9,7 +9,7 @@ It has been made for learning purposes.
   It contains scripts that creates database tables using T-SQL and strored procedures, which are used to select data from and insert into database.
 
 ### PSMDataManager
-  This is WebAPI project with Swagger addon. It has GET and POST methods to collect data from Database. All models used in this project are in the 'PSMDataManager.Library' to separate business logic from front-end application. Every controller retrieves data from a different table from database (for e.g. The `ProductController` takes data from the `Product` table). 
+  This is WebAPI project with Swagger addon. It has GET and POST methods to collect data from Database. All models used in this project are in the 'PSMDataManager.Library' to separate business logic from front-end application. Every controller retrieves data from a different table from database (for e.g. The `ProductsController` takes data from the `Product` table). 
 
 ### PSMDataManager.Library
   This project includes basic data access class `SqlDataAccess` and classes that load and save data in a database. It also contains models used in WebAPI application, because the API doesn't need separate models. It operates on complete data retrieved from the database.
