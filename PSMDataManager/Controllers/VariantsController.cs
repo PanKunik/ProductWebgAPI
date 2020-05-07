@@ -1,5 +1,6 @@
 ﻿using Microsoft.Ajax.Utilities;
 using PSMDataManager.Library.DataAccess;
+using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,11 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Variants
         [HttpGet]
-        public List<VariantDBModel> Get()
+        public List<VariantDBModel> Get([FromUri]VariantFilter filter)
         {
             VariantData data = new VariantData();
 
-            return data.GetVariants();
+            return data.GetVariants(filter);
         }
 
         // GET: api/Variants/id
@@ -28,26 +29,6 @@ namespace PSMDataManager.Controllers
             VariantData data = new VariantData();
 
             return data.GetVariantById(id).First();
-        }
-
-        // GET: api/variants/product/{id}
-        [HttpGet]
-        [Route("api/variants/product/{productId}")]
-        public List<VariantModel> GetVariantsOfProduct(int productId)
-        {
-            VariantData data = new VariantData();
-
-            return data.GetVariantsOfProduct(productId);
-        }
-
-        // GET: api/variants/price/{minPrice}/{maxPrice}
-        [HttpGet]
-        [Route("api/variants/price")]
-        public List<VariantModel> GetVariantsInPriceRange(int? minPrice = null, int? maxPrice = null)
-        {
-            VariantData data = new VariantData();
-
-            return data.GetVariantsInPriceRange(minPrice, maxPrice);
         }
 
         // POST: api/Variants

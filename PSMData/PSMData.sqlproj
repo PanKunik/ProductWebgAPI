@@ -83,8 +83,6 @@
     <Build Include="dbo\Stored Procedures\spVariantInsert.sql" />
     <Build Include="dbo\Stored Procedures\spCategoryGetAll.sql" />
     <Build Include="dbo\Stored Procedures\spBrandGetAll.sql" />
-    <Build Include="dbo\Stored Procedures\spProductLookupByCategory.sql" />
-    <Build Include="dbo\Stored Procedures\spProductLookupByBrand.sql" />
     <Build Include="dbo\Stored Procedures\spBrandLookup.sql" />
     <Build Include="dbo\Stored Procedures\spBrandDeleteById.sql" />
     <Build Include="dbo\Stored Procedures\spBrandUpdateById.sql" />
@@ -93,10 +91,8 @@
     <Build Include="dbo\Stored Procedures\spCategoryInsert.sql" />
     <Build Include="dbo\Stored Procedures\spCategoryUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spCategoryDeleteById.sql" />
-    <Build Include="dbo\Stored Procedures\spProductLookupByName.sql" />
     <Build Include="dbo\Stored Procedures\spVariantUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spProductUpdateById.sql" />
-    <Build Include="dbo\Stored Procedures\spVariantLookupByPrice.sql" />
-    <Build Include="dbo\Stored Procedures\spVariantLookupByProduct.sql" />
+    <Build Include="dbo\Stored Procedures\spProductDeleteById.sql" />
   </ItemGroup>
 </Project>

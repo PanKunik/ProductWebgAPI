@@ -22,17 +22,13 @@ Retrieve one specified product or delete one. If you add data in body you can ed
 ```
 http://localhost:44339/api/products/1
 ```
-You can search for all products whose name or description contains given string. For e.g. to GET all products that contains "milk" you can use:
+You can search for products by using query parameters like:
+- category -> allows you to search for products of specified category (search by id)
+- brand -> allows you to search for products of specified brand (search by id)
+- name -> allows you to search for products whose name is like: %name%
+For e.g. To search for product with id category = 1, id brand = 3 and name containing "milk" you can use:
 ```
-http://localhost:44339/api/products/search/milk
-```
-To get all products that are from specified category or from specified manufacturer you can use:
-```
-http://localhost:44339/api/products/brand/lubella
-```
-or
-```
-http://localhost:44339/api/products/categories/pasta
+http://localhost:44339/api/products?category=1&brand=3&name=milk
 ```
 
 ### PSMDataManager.Library

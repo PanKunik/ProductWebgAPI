@@ -31,16 +31,6 @@ namespace PSMDataManager.Controllers
             return data.GetCategoryById(id);
         }
 
-        // GET: api/Categories/id/products
-        [HttpGet]
-        [Route("api/Categories/{id}/products")]
-        public IEnumerable<string> GetProductsOfCategory(int id)
-        {
-            //CategoryData data = new CategoryData();
-
-            return new string[] { "val1", "val2", "val3" };
-        }
-
         // POST: api/Categories
         [HttpPost]
         public void Post([FromBody]string category)

@@ -22,44 +22,11 @@ namespace PSMDataManager.Library.DataAccess
             return product;
         }
 
-        public List<ProductDBModel> GetProductByCategory(int Id)
-        {
-            SqlDataAccess sql = new SqlDataAccess();
-
-            dynamic parameters = new { Id = Id };
-
-            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByCategory", parameters, "DefaultConnection");
-
-            return product;
-        }
-
-        public List<ProductDBModel> GetProductByBrand(int Id)
-        {
-            SqlDataAccess sql = new SqlDataAccess();
-
-            dynamic parameters = new { Id = Id };
-
-            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByBrand", parameters, "DefaultConnection");
-
-            return product;
-        }
-
-        public List<ProductDBModel> SearchProducts(string Keyword)
-        {
-            SqlDataAccess sql = new SqlDataAccess();
-
-            dynamic parameters = new { Keyword = Keyword };
-
-            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookupByName", parameters, "DefaultConnection");
-
-            return product;
-        }
-
         public List<ProductDBModel> GetProducts(ProductFilter filter)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var parameters = new { @BrandId = filter.BrandId, @CategoryId = filter.CategoryId, @Name = filter.Name };
+            var parameters = new { BrandId = filter.Brand, CategoryId = filter.Category, Name = filter.Name };
 
             var products = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductGetAll", parameters, "DefaultConnection");
 
@@ -80,6 +47,15 @@ namespace PSMDataManager.Library.DataAccess
             var parameters = new { Id = id, Name = product.Name, Description = product.Description, CategoryId = product.CategoryId, BrandId = product.BrandId }; 
 
             sql.UpdateData<dynamic>("dbo.spProductUpdateById", parameters, "DefaultConnection");
+        }
+
+        public void DeleteProductById(int id)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var parameters = new { Id = id}; 
+
+            sql.UpdateData<dynamic>("dbo.spProductDeleteById", parameters, "DefaultConnection");
         }
     }
 }

@@ -30,36 +30,6 @@ namespace PSMDataManager.Controllers
             return data.GetProductById(id).First();
         }
 
-        // GET: api/Products/category/id
-        [HttpGet]
-        [Route("api/Products/category/{id}")]
-        public List<ProductDBModel> GetByCategoryId(int id)
-        {
-            ProductData data = new ProductData();
-
-            return data.GetProductByCategory(id);
-        }
-
-        // GET: api/Products/brand/id
-        [HttpGet]
-        [Route("api/Products/brand/{id}")]
-        public List<ProductDBModel> GetByBrandId(int id)
-        {
-            ProductData data = new ProductData();
-
-            return data.GetProductByBrand(id);
-        }
-
-        // GET: api/Products/search/name
-        [HttpGet]
-        [Route("api/Products/search/{name}")]
-        public List<ProductDBModel> SearchForProducts(string keyword)
-        {
-            ProductData data = new ProductData();
-
-            return data.SearchProducts(keyword);
-        }
-
         // POST: api/Products
         [HttpPost]
         public void Post(ProductModel product)
@@ -67,6 +37,24 @@ namespace PSMDataManager.Controllers
             ProductData data = new ProductData();
 
             data.SaveProduct(product);
+        }
+
+        // PUT: api/products/id
+        [HttpPut]
+        public void Put(int id, ProductModel product)
+        {
+            ProductData data = new ProductData();
+
+            data.UpdateProductById(id, product);
+        }
+
+        // DELETE:
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            ProductData data = new ProductData();
+
+            data.DeleteProductById(id);
         }
     }
 }

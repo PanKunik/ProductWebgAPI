@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.Internal.DataAccess;
+﻿using PSMDataManager.Library.Filters;
+using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -21,43 +22,13 @@ namespace PSMDataManager.Library.DataAccess
             return variant;
         }
 
-        public List<VariantDBModel> GetVariants()
+        public List<VariantDBModel> GetVariants(VariantFilter filter)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var variants = sql.LoadData<VariantDBModel, dynamic>("dbo.spVariantGetAll", new { }, "DefaultConnection");
+            var parameters = new { ProductId = filter.Product, MinPrice = filter.MinPrice, MaxPrice = filter.MaxPrice };
 
-            return variants;
-        }
-
-        public List<VariantModel> GetVariantsOfProduct(int productId)
-        {
-            SqlDataAccess sql = new SqlDataAccess();
-
-            var parameters = new { ProductId = productId };
-
-            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookupByProduct", parameters, "DefaultConnection");
-
-            return variants;
-        }
-
-        public List<VariantModel> GetVariantsInPriceRange(int? minPrice, int? maxPrice)
-        {
-            SqlDataAccess sql = new SqlDataAccess();
-
-            if(maxPrice == null)
-            {
-                maxPrice = int.MaxValue;
-            }
-
-            if(minPrice == null)
-            {
-                minPrice = 0;
-            }
-            
-            var parameters = new { MinPrice = minPrice, MaxPrice = maxPrice };
-
-            var variants = sql.LoadData<VariantModel, dynamic>("dbo.spVariantLookupByPrice", parameters, "DefaultConnection");
+            var variants = sql.LoadData<VariantDBModel, dynamic>("dbo.spVariantGetAll", parameters, "DefaultConnection");
 
             return variants;
         }

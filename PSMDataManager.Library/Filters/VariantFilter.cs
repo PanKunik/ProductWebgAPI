@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PSMDataManager.Library.Filters
 {
-    public class ProductFilter
+    public class VariantFilter
     {
         public int? Page { get; set; }
         public byte? Limit { get; set; }
-        public string Name { get; set; }
-        public int? Category { get; set; }
-        public int? Brand { get; set; }
+        public int? Product { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
     }
 }
