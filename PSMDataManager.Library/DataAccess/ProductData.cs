@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.Internal.DataAccess;
+﻿using PSMDataManager.Library.Filters;
+using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -54,11 +55,13 @@ namespace PSMDataManager.Library.DataAccess
             return product;
         }
 
-        public List<ProductDBModel> GetProducts()
+        public List<ProductDBModel> GetProducts(ProductFilter filter)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var products = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductGetAll", new { }, "DefaultConnection");
+            var parameters = new { @BrandId = filter.BrandId, @CategoryId = filter.CategoryId, @Name = filter.Name };
+
+            var products = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductGetAll", parameters, "DefaultConnection");
 
             return products;
         }

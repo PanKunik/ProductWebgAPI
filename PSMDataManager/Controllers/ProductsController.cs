@@ -1,4 +1,5 @@
 ﻿using PSMDataManager.Library.DataAccess;
+using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Products
         [HttpGet]
-        public List<ProductDBModel> Get()
+        public List<ProductDBModel> Get([FromUri]ProductFilter filter)
         {
             ProductData data = new ProductData();
 
-            return data.GetProducts();
+            return data.GetProducts(filter);
         }
 
         // GET: api/Products/id
@@ -29,7 +30,7 @@ namespace PSMDataManager.Controllers
             return data.GetProductById(id).First();
         }
 
-        // GET: api/Products/categoryId/id
+        // GET: api/Products/category/id
         [HttpGet]
         [Route("api/Products/category/{id}")]
         public List<ProductDBModel> GetByCategoryId(int id)
@@ -39,7 +40,7 @@ namespace PSMDataManager.Controllers
             return data.GetProductByCategory(id);
         }
 
-        // GET: api/Products/categoryId/id
+        // GET: api/Products/brand/id
         [HttpGet]
         [Route("api/Products/brand/{id}")]
         public List<ProductDBModel> GetByBrandId(int id)
