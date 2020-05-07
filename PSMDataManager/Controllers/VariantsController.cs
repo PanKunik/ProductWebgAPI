@@ -46,14 +46,16 @@ namespace PSMDataManager.Controllers
         {
             VariantData data = new VariantData();
 
-            data.UpdateVariant(id, variant);
+            data.UpdateVariantById(id, variant);
         }
 
         // DELETE: api/Variants/id
         [HttpDelete]
         public void Delete(int id)
         {
+            VariantData data = new VariantData();
 
+            data.DeleteVariantById(id);
         }
     }
 }

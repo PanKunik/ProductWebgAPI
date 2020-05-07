@@ -94,5 +94,6 @@
     <Build Include="dbo\Stored Procedures\spVariantUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spProductUpdateById.sql" />
     <Build Include="dbo\Stored Procedures\spProductDeleteById.sql" />
+    <Build Include="dbo\Stored Procedures\spVariantDeleteById.sql" />
   </ItemGroup>
 </Project>
