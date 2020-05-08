@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.Filters;
+﻿using PSMDataManager.Library.Exceptions;
+using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
@@ -11,15 +12,15 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class ProductData
     {
-        public List<ProductDBModel> GetProductById(int Id)
+        public ProductDBModel GetProductById(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            dynamic parameters = new { Id = Id };
+            var parameters = new { Id = Id };
 
             var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookup", parameters, "DefaultConnection");
 
-            return product;
+            return product.FirstOrDefault();
         }
 
         public List<ProductDBModel> GetProducts(ProductFilter filter)

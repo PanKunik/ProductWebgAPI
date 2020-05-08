@@ -1,5 +1,7 @@
 ﻿using PSMDataManager.Library.DataAccess;
+using PSMDataManager.Library.Exceptions;
 using PSMDataManager.Library.Models;
+using Swashbuckle.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.UI.WebControls;
 
 namespace PSMDataManager.Controllers
@@ -15,20 +18,46 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Categories
         [HttpGet]
-        public List<CategoryModel> Get()
+        [ResponseType(typeof(List<CategoryModel>))]
+        public HttpResponseMessage Get()
         {
             CategoryData data = new CategoryData();
+            List<CategoryModel> categories = data.GetCategories();
 
-            return data.GetCategories();
+            HttpResponseMessage response;
+
+            if(categories.Count() <= 0)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, categories);
+            }
+
+            return response;
         }
 
         // GET: api/Categories/id
         [HttpGet]
-        public CategoryModel Get(int id)
+        [ResponseType(typeof(CategoryModel))]
+        public HttpResponseMessage Get(int id)
         {
             CategoryData data = new CategoryData();
+            CategoryModel category = data.GetCategoryById(id);
 
-            return data.GetCategoryById(id);
+            HttpResponseMessage response;
+
+            if(category == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, category);
+            }
+
+            return response;
         }
 
         // POST: api/Categories

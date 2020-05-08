@@ -1,12 +1,16 @@
 ﻿using PSMDataManager.Library.DataAccess;
+using PSMDataManager.Library.Exceptions;
 using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
+using Swashbuckle.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PSMDataManager.Controllers
 {
@@ -14,20 +18,46 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Products
         [HttpGet]
-        public List<ProductDBModel> Get([FromUri]ProductFilter filter)
+        [ResponseType(typeof(List<ProductDBModel>))]
+        public HttpResponseMessage Get([FromUri]ProductFilter filter)
         {
             ProductData data = new ProductData();
+            List<ProductDBModel> products = data.GetProducts(filter);
 
-            return data.GetProducts(filter);
+            HttpResponseMessage response;
+
+            if(products.Count() <= 0)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values. " });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, products);
+            }
+
+            return response;
         }
 
         // GET: api/Products/id
         [HttpGet]
-        public ProductDBModel GetById(int id)
+        [ResponseType(typeof(ProductDBModel))]
+        public HttpResponseMessage GetById(int id)
         {
             ProductData data = new ProductData();
+            ProductDBModel product = data.GetProductById(id);
 
-            return data.GetProductById(id).First();
+            HttpResponseMessage response;
+
+            if(product == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, product);
+            }
+
+            return response;
         }
 
         // POST: api/Products

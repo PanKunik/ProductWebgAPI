@@ -1,5 +1,6 @@
 ﻿using Microsoft.Ajax.Utilities;
 using PSMDataManager.Library.DataAccess;
+using PSMDataManager.Library.Exceptions;
 using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PSMDataManager.Controllers
 {
@@ -15,20 +17,47 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Variants
         [HttpGet]
-        public List<VariantDBModel> Get([FromUri]VariantFilter filter)
+        [ResponseType(typeof(List<VariantDBModel>))]
+        public HttpResponseMessage Get([FromUri]VariantFilter filter)
         {
             VariantData data = new VariantData();
+            List<VariantDBModel> variants = data.GetVariants(filter);
 
-            return data.GetVariants(filter);
+            HttpResponseMessage response;
+
+            if (variants.Count() <= 0)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, variants);
+            }
+
+            return response;
         }
 
         // GET: api/Variants/id
         [HttpGet]
-        public VariantDBModel Get(int id)
+        [ResponseType(typeof(VariantDBModel))]
+        public HttpResponseMessage Get(int id)
         {
             VariantData data = new VariantData();
 
-            return data.GetVariantById(id).First();
+            VariantDBModel variant = data.GetVariantById(id);
+
+            HttpResponseMessage response;
+
+            if (variant == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, variant);
+            }
+
+            return response;
         }
 
         // POST: api/Variants

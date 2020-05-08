@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.Internal.DataAccess;
+﻿using PSMDataManager.Library.Exceptions;
+using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,9 @@ namespace PSMDataManager.Library.DataAccess
 
             var parameters = new { Id = id };
 
-            var brands = sql.LoadData<BrandModel, dynamic>("dbo.spBrandLookup", parameters, "DefaultConnection");
+            var brand = sql.LoadData<BrandModel, dynamic>("dbo.spBrandLookup", parameters, "DefaultConnection");
 
-            return brands.FirstOrDefault();
+            return brand.FirstOrDefault();
         }
 
         public void SaveBrand(string brand)

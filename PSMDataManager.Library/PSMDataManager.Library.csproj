@@ -48,6 +48,7 @@
     <Compile Include="DataAccess\BrandData.cs" />
     <Compile Include="DataAccess\CategoryData.cs" />
     <Compile Include="DataAccess\VariantData.cs" />
+    <Compile Include="Exceptions\NoDataFoundException.cs" />
     <Compile Include="Filters\ProductFilter.cs" />
     <Compile Include="Filters\VariantFilter.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />

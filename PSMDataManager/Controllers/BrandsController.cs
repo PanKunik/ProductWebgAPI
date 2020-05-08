@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PSMDataManager.Controllers
 {
@@ -12,20 +14,46 @@ namespace PSMDataManager.Controllers
     {
         // GET: /api/Brands
         [HttpGet]
-        public List<BrandModel> Get()
+        [ResponseType(typeof(List<BrandModel>))]
+        public HttpResponseMessage Get()
         {
             BrandData data = new BrandData();
+            List<BrandModel> brands = data.GetBrands();
 
-            return data.GetBrands();
+            HttpResponseMessage response;
+
+            if (brands.Count() <= 0)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, brands);
+            }
+
+            return response;
         }
 
         // GET: /api/Brands/id
         [HttpGet]
-        public BrandModel Get(int id)
+        [ResponseType(typeof(BrandModel))]
+        public HttpResponseMessage Get(int id)
         {
             BrandData data = new BrandData();
+            BrandModel brand = data.GetBrandById(id);
 
-            return data.GetBrandById(id);
+            HttpResponseMessage response;
+
+            if (brand == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, brand);
+            }
+
+            return response;
         }
 
         // POST: api/Brands

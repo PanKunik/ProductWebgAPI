@@ -1,4 +1,5 @@
-﻿using PSMDataManager.Library.Filters;
+﻿using PSMDataManager.Library.Exceptions;
+using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
@@ -11,15 +12,15 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class VariantData
     {
-        public List<VariantDBModel> GetVariantById(int Id)
+        public VariantDBModel GetVariantById(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            dynamic parameters = new { Id = Id };
+            var parameters = new { Id = Id };
 
             var variant = sql.LoadData<VariantDBModel, dynamic>("dbo.spVariantLookup", parameters, "DefaultConnection");
 
-            return variant;
+            return variant.FirstOrDefault();
         }
 
         public List<VariantDBModel> GetVariants(VariantFilter filter)
