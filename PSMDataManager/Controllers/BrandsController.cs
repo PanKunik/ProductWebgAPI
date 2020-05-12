@@ -58,11 +58,23 @@ namespace PSMDataManager.Controllers
 
         // POST: api/Brands
         [HttpPost]
-        public void Post([FromBody]string brand)
+        public IHttpActionResult Post([FromBody]string brand)
         {
+            HttpResponseMessage result;
+
             BrandData data = new BrandData();
 
-            data.SaveBrand(brand);
+            if (brand == "" || brand == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "" });
+            }
+            else
+            {
+                data.SaveBrand(brand);
+                result = Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+
+            return (IHttpActionResult)result;
         }
 
         // PUT: api/Brands/id

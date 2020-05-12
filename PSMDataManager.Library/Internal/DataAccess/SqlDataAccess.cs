@@ -35,7 +35,9 @@ namespace PSMDataManager.Library.Internal.DataAccess
 
             using(IDbConnection connection = new SqlConnection(connectionString))
             {
-                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                var result = connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+
+                Console.WriteLine();
             }
         }
 

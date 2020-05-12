@@ -1,5 +1,4 @@
 ﻿using PSMDataManager.Library.DataAccess;
-using PSMDataManager.Library.Exceptions;
 using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using Swashbuckle.Swagger;
