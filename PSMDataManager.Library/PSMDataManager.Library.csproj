@@ -35,6 +35,7 @@
       <HintPath>..\PSMDataManager\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,7 +53,9 @@
     <Compile Include="Filters\VariantFilter.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
     <Compile Include="DataAccess\ProductData.cs" />
+    <Compile Include="Models\BrandDBModel.cs" />
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CategoryDBModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ProductDBModel.cs" />
     <Compile Include="Models\ProductModel.cs" />

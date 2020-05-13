@@ -3,6 +3,7 @@ using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using Swashbuckle.Swagger;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -61,18 +62,45 @@ namespace PSMDataManager.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public void Post(ProductModel product)
+        [ResponseType(typeof(ProductModel))]
+        public HttpResponseMessage Post(ProductModel product)
         {
             ProductData data = new ProductData();
+            HttpResponseMessage result;
 
-            data.SaveProduct(product);
+            if(ModelState.IsValid)
+            {
+                ModelsValidation validation = new ModelsValidation();
+
+                if(validation.DoesBrandExist(product.BrandId) == false)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no brand with this Id." });
+                }
+
+                if (validation.DoesCategoryExist(product.CategoryId) == false)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no category with this Id." });
+                }
+
+                data.SaveProduct(product);
+                result = Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Invalid model. Some values are null or out of range." });
+            }
+
+            return result;
         }
 
         // PUT: api/products/id
         [HttpPut]
-        public void Put(int id, ProductModel product)
+        [ResponseType(typeof(ProductDBModel))]
+        public void Put([System.Web.Mvc.Bind(Include = "Id")]int id, [System.Web.Mvc.Bind(Include = "Name, Description,CategoryId, BrandId" )] ProductModel product)
         {
             ProductData data = new ProductData();
+
+
 
             data.UpdateProductById(id, product);
         }

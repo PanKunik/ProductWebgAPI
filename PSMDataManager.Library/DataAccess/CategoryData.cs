@@ -10,22 +10,22 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class CategoryData
     {
-        public List<CategoryModel> GetCategories()
+        public List<CategoryDBModel> GetCategories()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var categories = sql.LoadData<CategoryModel, dynamic>("dbo.spCategoryGetAll", new { }, "DefaultConnection");
+            var categories = sql.LoadData<CategoryDBModel, dynamic>("dbo.spCategoryGetAll", new { }, "DefaultConnection");
 
             return categories;
         }
 
-        public CategoryModel GetCategoryById(int id)
+        public CategoryDBModel GetCategoryById(int id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var parameters = new { Id = id };
 
-            var categories = sql.LoadData<CategoryModel, dynamic>("dbo.spCategoryLookup", parameters, "DefaultConnection");
+            var categories = sql.LoadData<CategoryDBModel, dynamic>("dbo.spCategoryLookup", parameters, "DefaultConnection");
 
             return categories.FirstOrDefault();
         }

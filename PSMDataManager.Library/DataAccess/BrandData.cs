@@ -10,22 +10,22 @@ namespace PSMDataManager.Library.DataAccess
 {
     public class BrandData
     {
-        public List<BrandModel> GetBrands()
+        public List<BrandDBModel> GetBrands()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var brands = sql.LoadData<BrandModel, dynamic>("dbo.spBrandGetAll", new { }, "DefaultConnection");
+            var brands = sql.LoadData<BrandDBModel, dynamic>("dbo.spBrandGetAll", new { }, "DefaultConnection");
 
             return brands;
         }
 
-        public BrandModel GetBrandById(int id)
+        public BrandDBModel GetBrandById(int id)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var parameters = new { Id = id };
 
-            var brand = sql.LoadData<BrandModel, dynamic>("dbo.spBrandLookup", parameters, "DefaultConnection");
+            var brand = sql.LoadData<BrandDBModel, dynamic>("dbo.spBrandLookup", parameters, "DefaultConnection");
 
             return brand.FirstOrDefault();
         }

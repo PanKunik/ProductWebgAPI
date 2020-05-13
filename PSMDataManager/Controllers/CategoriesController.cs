@@ -17,11 +17,11 @@ namespace PSMDataManager.Controllers
     {
         // GET: api/Categories
         [HttpGet]
-        [ResponseType(typeof(List<CategoryModel>))]
+        [ResponseType(typeof(List<CategoryDBModel>))]
         public HttpResponseMessage Get()
         {
             CategoryData data = new CategoryData();
-            List<CategoryModel> categories = data.GetCategories();
+            List<CategoryDBModel> categories = data.GetCategories();
 
             HttpResponseMessage response;
 
@@ -39,15 +39,20 @@ namespace PSMDataManager.Controllers
 
         // GET: api/Categories/id
         [HttpGet]
-        [ResponseType(typeof(CategoryModel))]
+        [ResponseType(typeof(CategoryDBModel))]
         public HttpResponseMessage Get(int id)
         {
+            if (id <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Id parameter must be greater than 0." });
+            }
+
             CategoryData data = new CategoryData();
-            CategoryModel category = data.GetCategoryById(id);
+            CategoryDBModel category = data.GetCategoryById(id);
 
             HttpResponseMessage response;
 
-            if(category == null)
+            if (category == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
             }
@@ -61,29 +66,74 @@ namespace PSMDataManager.Controllers
 
         // POST: api/Categories
         [HttpPost]
-        public void Post([FromBody]string category)
+        [ResponseType(typeof(CategoryModel))]
+        public HttpResponseMessage Post([FromBody]CategoryModel Category)
         {
+            HttpResponseMessage response;
             CategoryData data = new CategoryData();
 
-            data.SaveCategory(category);
+            if (ModelState.IsValid)
+            {
+                data.SaveCategory(Category.Category);
+                response = Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Category name must be between 2 - 64 signs. Cannot be null or empty." });
+            }
+
+            return response;
         }
 
         // PUT: api/Categories/id
         [HttpPut]
-        public void Put(int id, [FromBody]string category)
+        [ResponseType(typeof(CategoryDBModel))]
+        public HttpResponseMessage Put(int id, [FromBody][System.Web.Mvc.Bind(Include = "Category")]CategoryModel Category)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             CategoryData data = new CategoryData();
 
-            data.UpdateCategoryById(id, category);
+            if (ModelState.IsValid)
+            {
+                if (validation.DoesCategoryExist(id) == false)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no category with given Id parameter." });
+                }
+                else
+                {
+                    data.UpdateCategoryById(id, Category.Category);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Category name must be between 2 - 64 signs. Cannot be null or empty." });
+            }
+
+            return response;
         }
 
         // DELETE: api/Categories/id
         [HttpDelete]
-        public void Delete(int id)
+        [ResponseType(typeof(int))]
+        public HttpResponseMessage Delete(int id)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             CategoryData data = new CategoryData();
 
-            data.DeleteCategoryById(id);
+            if(validation.DoesCategoryExist(id) == false)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no category with given Id parameter." });
+            }
+            else
+            {
+                data.DeleteCategoryById(id);
+                response = Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+
+            return response;
         }
     }
 }

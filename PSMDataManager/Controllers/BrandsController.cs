@@ -1,5 +1,6 @@
 ﻿using PSMDataManager.Library.DataAccess;
 using PSMDataManager.Library.Models;
+using Swashbuckle.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,19 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
+// TODO: Check for constraints
+
 namespace PSMDataManager.Controllers
 {
     public class BrandsController : ApiController
     {
         // GET: /api/Brands
         [HttpGet]
-        [ResponseType(typeof(List<BrandModel>))]
+        [ResponseType(typeof(List<BrandDBModel>))]
         public HttpResponseMessage Get()
         {
             BrandData data = new BrandData();
-            List<BrandModel> brands = data.GetBrands();
+            List<BrandDBModel> brands = data.GetBrands();
 
             HttpResponseMessage response;
 
@@ -36,17 +39,22 @@ namespace PSMDataManager.Controllers
 
         // GET: /api/Brands/id
         [HttpGet]
-        [ResponseType(typeof(BrandModel))]
+        [ResponseType(typeof(BrandDBModel))]
         public HttpResponseMessage Get(int id)
         {
+            if (id <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Id parameter must be greater than 0." });
+            }
+
             BrandData data = new BrandData();
-            BrandModel brand = data.GetBrandById(id);
+            BrandDBModel brand = data.GetBrandById(id);
 
             HttpResponseMessage response;
 
             if (brand == null)
             {
-                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given parameters values." });
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "No data found matching given id." });
             }
             else
             {
@@ -58,41 +66,74 @@ namespace PSMDataManager.Controllers
 
         // POST: api/Brands
         [HttpPost]
-        public IHttpActionResult Post([FromBody]string brand)
+        [ResponseType(typeof(BrandModel))]
+        public HttpResponseMessage Post([FromBody]BrandModel Brand)
         {
-            HttpResponseMessage result;
-
+            HttpResponseMessage response;
             BrandData data = new BrandData();
 
-            if (brand == "" || brand == null)
+            if(ModelState.IsValid)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "" });
+                data.SaveBrand(Brand.Brand);
+                response = Request.CreateResponse(HttpStatusCode.NoContent);
             }
             else
             {
-                data.SaveBrand(brand);
-                result = Request.CreateResponse(HttpStatusCode.NoContent);
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Brand name must be between 2 - 64 signs. Cannot be null or empty." });
             }
 
-            return (IHttpActionResult)result;
+            return response;
         }
 
         // PUT: api/Brands/id
         [HttpPut]
-        public void Put(int id, [FromBody]string brand)
+        [ResponseType(typeof(BrandDBModel))]
+        public HttpResponseMessage Put(int id, [FromBody][System.Web.Mvc.Bind(Include = "Brand")]BrandModel Brand)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             BrandData data = new BrandData();
 
-            data.UpdateBrandById(id, brand);
+            if(ModelState.IsValid)
+            {
+                if (validation.DoesBrandExist(id) == false)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no brand with given Id parameter." });
+                }
+                else
+                {
+                    data.UpdateBrandById(id, Brand.Brand);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Brand name must be between 2 - 64 signs. Cannot be null or empty." });
+            }
+
+            return response;
         }
 
         // DELETE: api/Brands/id
         [HttpDelete]
-        public void Delete(int id)
+        [ResponseType(typeof(int))]
+        public HttpResponseMessage Delete(int id)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             BrandData data = new BrandData();
 
-            data.DeleteBrandById(id);
+            if(validation.DoesBrandExist(id) == false)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no brand with given Id parameter." });
+            }
+            else
+            {
+                data.DeleteBrandById(id);
+                response = Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+
+            return response;
         }
     }
 }
