@@ -5,6 +5,7 @@ using Swashbuckle.Swagger;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -65,53 +66,138 @@ namespace PSMDataManager.Controllers
         [ResponseType(typeof(ProductModel))]
         public HttpResponseMessage Post(ProductModel product)
         {
+            HttpResponseMessage response;
             ProductData data = new ProductData();
-            HttpResponseMessage result;
 
             if(ModelState.IsValid)
             {
-                ModelsValidation validation = new ModelsValidation();
+                response = CanAddProduct(product.CategoryId, product.BrandId);
 
-                if(validation.DoesBrandExist(product.BrandId) == false)
+                if(response.StatusCode == HttpStatusCode.NoContent)
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no brand with this Id." });
+                    data.SaveProduct(product);
                 }
-
-                if (validation.DoesCategoryExist(product.CategoryId) == false)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no category with this Id." });
-                }
-
-                data.SaveProduct(product);
-                result = Request.CreateResponse(HttpStatusCode.NoContent);
             }
             else
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Invalid model. Some values are null or out of range." });
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Invalid model. Some values are null or out of range." });
             }
 
-            return result;
+            return response;
         }
 
         // PUT: api/products/id
         [HttpPut]
         [ResponseType(typeof(ProductDBModel))]
-        public void Put([System.Web.Mvc.Bind(Include = "Id")]int id, [System.Web.Mvc.Bind(Include = "Name, Description,CategoryId, BrandId" )] ProductModel product)
+        public HttpResponseMessage Put([System.Web.Mvc.Bind(Include = "Id")]int id, [System.Web.Mvc.Bind(Include = "Name, Description,CategoryId, BrandId" )] ProductModel product)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             ProductData data = new ProductData();
 
+            if(ModelState.IsValid)
+            {
+                if(validation.DoesProductExist(id) == false)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no product with given Id parameter." });
+                }
+                else
+                {
+                    data.UpdateProductById(id, product);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Name must be between 2 - 100 signs. Category and brand id must be greater than 0." });
+            }
 
-
-            data.UpdateProductById(id, product);
+            return response;
         }
 
         // DELETE:
         [HttpDelete]
-        public void Delete(int id)
+        [ResponseType(typeof(int))]
+        public HttpResponseMessage Delete(int id)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             ProductData data = new ProductData();
 
-            data.DeleteProductById(id);
+            if(validation.DoesProductExist(id) == false)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no product with given Id parameter." });
+            }
+            else
+            {
+                try
+                {
+                    data.DeleteProductById(id);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                catch (SqlException sqlException)
+                {
+                    response = CheckSqlExceptionNumber(sqlException.Number);
+                }
+            }
+
+            return response;
+        }
+
+        [NonAction]
+        private HttpResponseMessage CanAddProduct(int category, int brand)
+        {
+            HttpResponseMessage response;
+
+            ModelsValidation validation = new ModelsValidation();
+
+            int result = 0;
+
+            if(validation.DoesBrandExist(brand) == false)
+            {
+                result += 2;
+            }
+
+            if(validation.DoesCategoryExist(category) == false)
+            {
+                result += 1;
+            }
+
+            switch (result)
+            {
+                case 0:
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                    break;
+                case 1:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no category with given Id parameter." });
+                    break;
+                case 2:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no brand with given Id parameter." });
+                    break;
+                default:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There are no category and brand with given Id parameters." });
+                    break;
+            }
+
+            return response;
+        }
+
+        [NonAction]
+        private HttpResponseMessage CheckSqlExceptionNumber(int number)
+        {
+            HttpResponseMessage response;
+
+            switch (number)
+            {
+                case 547:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Cannot delete this product. There are references to this row in other tables." });
+                    break;
+                default:
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, new { Message = "Something went wrong. Contact with support or try again later." });
+                    break;
+            }
+
+            return response;
         }
     }
 }

@@ -3,6 +3,7 @@ using PSMDataManager.Library.Models;
 using Swashbuckle.Swagger;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -129,8 +130,33 @@ namespace PSMDataManager.Controllers
             }
             else
             {
-                data.DeleteCategoryById(id);
-                response = Request.CreateResponse(HttpStatusCode.NoContent);
+                try
+                {
+                    data.DeleteCategoryById(id);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                catch(SqlException sqlException)
+                {
+                    response = CheckSqlExceptionNumber(sqlException.Number);
+                }
+            }
+
+            return response;
+        }
+
+        [NonAction]
+        private HttpResponseMessage CheckSqlExceptionNumber(int number)
+        {
+            HttpResponseMessage response;
+
+            switch (number)
+            {
+                case 547:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Cannot delete this category. There are references to this row in other tables." });
+                    break;
+                default:
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, new { Message = "Something went wrong. Contact with support or try again later." });
+                    break;
             }
 
             return response;

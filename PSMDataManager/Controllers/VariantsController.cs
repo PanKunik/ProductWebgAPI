@@ -10,6 +10,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
+// TODO: Validate model
+// TODO: StatusCode return in actions
+// TODO: Refactor SqlExceton?
+// TODO: Refactor checking if rows in other tables exist?
+
 namespace PSMDataManager.Controllers
 {
     public class VariantsController : ApiController
