@@ -52,5 +52,20 @@ namespace PSMDataManager
 
             return exist;
         }
+
+        internal bool DoesVariantExist(int id)
+        {
+            bool exist = true;
+
+            VariantData variantData = new VariantData();
+            var data = variantData.GetVariantById(id);
+
+            if(data == null)
+            {
+                exist = false;
+            }
+
+            return exist;
+        }
     }
 }

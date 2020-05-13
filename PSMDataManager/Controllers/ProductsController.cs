@@ -80,7 +80,7 @@ namespace PSMDataManager.Controllers
             }
             else
             {
-                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Invalid model. Some values are null or out of range." });
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Invalid model.", ModelValidation = "Name must be between 2 - 100 signs. Category and brand id must be greater than 0." });
             }
 
             return response;
@@ -103,8 +103,12 @@ namespace PSMDataManager.Controllers
                 }
                 else
                 {
-                    data.UpdateProductById(id, product);
-                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                    response = CanAddProduct(product.CategoryId, product.BrandId);
+
+                    if(response.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        data.UpdateProductById(id, product);
+                    }
                 }
             }
             else

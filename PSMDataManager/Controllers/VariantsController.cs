@@ -4,15 +4,17 @@ using PSMDataManager.Library.Filters;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-// TODO: Validate model
-// TODO: StatusCode return in actions
-// TODO: Refactor SqlExceton?
+// TODO: Validate every given Id (range)
+// TODO: Product - return Variants and features too
+// TODO: Instead returning NoContent return Created at POST methods
+// TODO: Refactor SqlException?
 // TODO: Refactor checking if rows in other tables exist?
 
 namespace PSMDataManager.Controllers
@@ -46,8 +48,12 @@ namespace PSMDataManager.Controllers
         [ResponseType(typeof(VariantDBModel))]
         public HttpResponseMessage Get(int id)
         {
-            VariantData data = new VariantData();
+            if(id <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Id parameter must be greater than 0." });
+            }
 
+            VariantData data = new VariantData();
             VariantDBModel variant = data.GetVariantById(id);
 
             HttpResponseMessage response;
@@ -66,29 +72,114 @@ namespace PSMDataManager.Controllers
 
         // POST: api/Variants
         [HttpPost]
-        public void Post(VariantModel variant)
+        [ResponseType(typeof(VariantModel))]
+        public HttpResponseMessage Post(VariantModel variant)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             VariantData data = new VariantData();
 
-            data.SaveVariant(variant);
+            if(ModelState.IsValid)
+            {
+                if(validation.DoesProductExist(variant.ProductId) == true)
+                {
+                    data.SaveVariant(variant);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no product with given Id parameter." });
+                }
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Product's id must be greater than 0. BasePrice, Tax and InStock must be a positive numbers." });
+            }
+
+            return response;
         }
 
         // PUT: api/Variants/id
         [HttpPut]
-        public void Put(int id, [FromBody]VariantModel variant)
+        [ResponseType(typeof(VariantDBModel))]
+        public HttpResponseMessage Put(int id, [FromBody][System.Web.Mvc.Bind(Include = "ProductId, BasePrice, Tax, InStock")]VariantModel variant)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             VariantData data = new VariantData();
 
-            data.UpdateVariantById(id, variant);
+            if(ModelState.IsValid)
+            {
+                if(validation.DoesVariantExist(id) == false)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no variant with given Id parameter." });
+                }
+                else
+                {
+                    if(validation.DoesProductExist(variant.ProductId) == false)
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no product with given Id parameter." });
+                    }
+                    else
+                    {
+                        data.UpdateVariantById(id, variant);
+                        response = Request.CreateResponse(HttpStatusCode.NoContent);
+                    }
+                }
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Model is invalid.", ModelValidation = "Product's id must be greater than 0. BasePrice, Tax and InStock must be a positive numbers." });
+            }
+
+            return response;
         }
 
         // DELETE: api/Variants/id
         [HttpDelete]
-        public void Delete(int id)
+        [ResponseType(typeof(int))]
+        public HttpResponseMessage Delete(int id)
         {
+            HttpResponseMessage response;
+            ModelsValidation validation = new ModelsValidation();
             VariantData data = new VariantData();
 
-            data.DeleteVariantById(id);
+            if(validation.DoesVariantExist(id) == false)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "There is no variant with given Id parameter." });
+            }
+            else
+            {
+                try
+                {
+                    data.DeleteVariantById(id);
+                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+                catch (SqlException sqlException)
+                {
+                    response = CheckSqlExceptionNumber(sqlException.Number);
+                }
+            }
+
+            return response;
+        }
+
+        [NonAction]
+        private HttpResponseMessage CheckSqlExceptionNumber(int number)
+        {
+            HttpResponseMessage response;
+
+            switch (number)
+            {
+                case 547:
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, new { Message = "Cannot delete this variant. There are references to this row in other tables." });
+                    break;
+                default:
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, new { Message = "Something went wrong. Contact with support or try again later." });
+                    break;
+            }
+
+            return response;
         }
     }
 }
