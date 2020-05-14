@@ -5,5 +5,5 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	UPDATE [dbo].[Category] SET [Category] = @Category WHERE [Id] = @Id;
+	UPDATE [dbo].[Category] SET [Category] = @Category WHERE [CategoryId] = @Id;
 END

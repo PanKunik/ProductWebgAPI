@@ -8,8 +8,8 @@ namespace PSMDataManager.Library.Models
 {
     public class VariantDBModel
     {
-        public int Id { get; set; }
-        public int ProductId { get; set; }
+        public int VariantId { get; set; }
+        public int Product_ProductId { get; set; }
         public decimal BasePrice { get; set; }
         public decimal Tax { get; set; }
         public int InStock { get; set; }

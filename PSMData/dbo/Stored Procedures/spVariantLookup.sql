@@ -4,6 +4,6 @@ AS
 Begin
 	set nocount on;
 
-	SELECT [Id], [ProductId], [BasePrice], [Tax], [InStock]
-	FROM [dbo].[Variant] WHERE Id = @Id;
+	SELECT [VariantId], [Product_ProductId], [BasePrice], [Tax], [InStock]
+	FROM [dbo].[Variant] WHERE [VariantId] = @Id;
 End

@@ -8,13 +8,13 @@ BEGIN
 
 	IF @ProductId = NULL AND @MinPrice = NULL AND @MaxPrice = NULL
 	BEGIN
-		SELECT [Id], [ProductId], [BasePrice], [Tax], [InStock]
+		SELECT [VariantId], [Product_ProductId], [BasePrice], [Tax], [InStock]
 		FROM [dbo].[Variant];
 	END
 	ELSE
 	BEGIN
-		SELECT [Id], [ProductId], [BasePrice], [Tax], [InStock] FROM [dbo].[Variant]
-		WHERE [ProductId] = ISNULL(@ProductId, [ProductId]) AND
+		SELECT [VariantId], [Product_ProductId], [BasePrice], [Tax], [InStock] FROM [dbo].[Variant]
+		WHERE [Product_ProductId] = ISNULL(@ProductId, [Product_ProductId]) AND
 			[BasePrice] >= ISNULL(@MinPrice, [BasePrice]) AND
 			[BasePrice] <= ISNULL(@MaxPrice, [BasePrice]);
 	END

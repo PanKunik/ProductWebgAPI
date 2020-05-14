@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[FeatureValue]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[FeatureValueId] INT NOT NULL PRIMARY KEY IDENTITY,
 	[FeatureValue] NVARCHAR(100) NOT NULL
 )

@@ -4,5 +4,5 @@ AS
 begin
 	set nocount on;
 
-	SELECT [Id], [Brand] FROM [dbo].[Brand] WHERE [Id] = @Id;
+	SELECT [BrandId], [Brand] FROM [dbo].[Brand] WHERE [BrandId] = @Id;
 end

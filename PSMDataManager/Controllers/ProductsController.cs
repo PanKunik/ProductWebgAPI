@@ -73,7 +73,7 @@ namespace PSMDataManager.Controllers
             {
                 response = CanAddProduct(product.CategoryId, product.BrandId);
 
-                if(response.StatusCode == HttpStatusCode.NoContent)
+                if(response.StatusCode == HttpStatusCode.Created)
                 {
                     data.SaveProduct(product);
                 }

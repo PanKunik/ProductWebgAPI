@@ -5,5 +5,5 @@ AS
 begin
 	set nocount on;
 
-	UPDATE [dbo].[Brand] SET [Brand] = @Brand WHERE [Id] = @Id
+	UPDATE [dbo].[Brand] SET [Brand] = @Brand WHERE [BrandId] = @Id
 end

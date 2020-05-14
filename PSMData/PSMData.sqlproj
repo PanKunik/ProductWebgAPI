@@ -96,4 +96,7 @@
     <Build Include="dbo\Stored Procedures\spProductDeleteById.sql" />
     <Build Include="dbo\Stored Procedures\spVariantDeleteById.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="PSMData.refactorlog" />
+  </ItemGroup>
 </Project>

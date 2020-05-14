@@ -9,5 +9,5 @@ BEGIN
 	set nocount on;
 
 	UPDATE [dbo].[Product] SET [Name] = @Name, [Description] = @Description, [CategoryId] = @CategoryId, [BrandId] = @BrandId
-	WHERE [Id] = @Id;
+	WHERE [ProductId] = @Id;
 END

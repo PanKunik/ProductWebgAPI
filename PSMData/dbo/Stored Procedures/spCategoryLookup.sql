@@ -4,5 +4,5 @@ AS
 begin
 	set nocount on;
 
-	SELECT [Id], [Category] FROM [dbo].[Category] WHERE [Id] = @Id;
+	SELECT [CategoryId], [Category] FROM [dbo].[Category] WHERE [CategoryId] = @Id;
 end

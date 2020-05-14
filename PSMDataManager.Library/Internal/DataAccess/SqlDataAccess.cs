@@ -29,6 +29,18 @@ namespace PSMDataManager.Library.Internal.DataAccess
             }
         }
 
+        public List<T> LoadData<T, U, V>(string storedProcedure, Func<T, U, T> mappingFunction, string splitOnColumn, V parameters, string connectionStringName)
+        {
+            string connectionString = GetConnectionString(connectionStringName);
+
+            using(IDbConnection connection = new SqlConnection(connectionString))
+            {
+                List<T> rows = connection.Query<T, U, T>(storedProcedure, mappingFunction, parameters, splitOn: splitOnColumn, commandType: CommandType.StoredProcedure).ToList();
+
+                return rows;
+            }
+        }
+
         public void SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);

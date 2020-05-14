@@ -8,6 +8,6 @@ AS
 BEGIN
 	set nocount on;
 
-	UPDATE [dbo].[Variant] SET [ProductId] = @ProductId, [BasePrice] = @BasePrice, [Tax] = @Tax, [InStock] = @InStock, [ModificationDate] = GETUTCDATE()
-	WHERE [Id] = @Id;
+	UPDATE [dbo].[Variant] SET [Product_ProductId] = @ProductId, [BasePrice] = @BasePrice, [Tax] = @Tax, [InStock] = @InStock, [ModificationDate] = GETUTCDATE()
+	WHERE [VariantId] = @Id;
 END

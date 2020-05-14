@@ -7,6 +7,6 @@ AS
 BEGIN
 	set nocount on;
 
-	INSERT INTO [dbo].[Variant] ([ProductId], [BasePrice], [Tax], [InStock], [CreationDate], [ModificationDate])
+	INSERT INTO [dbo].[Variant] ([Product_ProductId], [BasePrice], [Tax], [InStock], [CreationDate], [ModificationDate])
 	VALUES(@ProductId, @BasePrice, @Tax, @InStock, GETUTCDATE(), GETUTCDATE());
 END

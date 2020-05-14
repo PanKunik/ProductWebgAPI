@@ -74,7 +74,7 @@ namespace PSMDataManager.Controllers
             if(ModelState.IsValid)
             {
                 data.SaveBrand(Brand.Brand);
-                response = Request.CreateResponse(HttpStatusCode.NoContent);
+                response = Request.CreateResponse(HttpStatusCode.Created);
             }
             else
             {

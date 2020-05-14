@@ -3,6 +3,7 @@ using PSMDataManager.Library.Internal.DataAccess;
 using PSMDataManager.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,33 @@ namespace PSMDataManager.Library.DataAccess
 
             var parameters = new { Id = Id };
 
-            var product = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductLookup", parameters, "DefaultConnection");
+            string splitOnColumn = "VariantId";
 
-            return product.FirstOrDefault();
+            var productDictionary = new Dictionary<int, ProductDBModel>();
+
+            Func<ProductDBModel, VariantDBModel, ProductDBModel> mappFunc = (product, variant) =>
+            {
+                ProductDBModel productEntry;
+
+                if (!productDictionary.TryGetValue(product.ProductId, out productEntry))
+                {
+                    productEntry = product;
+                    productEntry.Variants = new List<VariantDBModel>();
+                    productDictionary.Add(productEntry.ProductId, productEntry);
+                }
+
+                if (variant != null)
+                {
+                    variant.Product_ProductId = product.ProductId;
+                }
+
+                productEntry.Variants.Add(variant);
+                return productEntry;
+            };
+
+            var data = sql.LoadData<ProductDBModel, VariantDBModel, dynamic>("dbo.spProductLookup", mappFunc, splitOnColumn, parameters, "DefaultConnection");
+
+            return data.FirstOrDefault();
         }
 
         public List<ProductDBModel> GetProducts(ProductFilter filter)
@@ -28,7 +53,31 @@ namespace PSMDataManager.Library.DataAccess
 
             var parameters = new { BrandId = filter.Brand, CategoryId = filter.Category, Name = filter.Name };
 
-            var products = sql.LoadData<ProductDBModel, dynamic>("dbo.spProductGetAll", parameters, "DefaultConnection");
+            string splitOnColumn = "VariantId";
+
+            var productDictionary = new Dictionary<int, ProductDBModel>();
+
+            Func<ProductDBModel, VariantDBModel, ProductDBModel> mappFunc = (product, variant) =>
+            {
+                ProductDBModel productEntry;
+
+                if (!productDictionary.TryGetValue(product.ProductId, out productEntry))
+                {
+                    productEntry = product;
+                    productEntry.Variants = new List<VariantDBModel>();
+                    productDictionary.Add(productEntry.ProductId, productEntry);
+                }
+
+                if (variant != null)
+                {
+                    variant.Product_ProductId = product.ProductId;
+                }
+
+                productEntry.Variants.Add(variant);
+                return productEntry;
+            };
+
+            var products = sql.LoadData<ProductDBModel, VariantDBModel, dynamic>("dbo.spProductGetAll", mappFunc, splitOnColumn, null, "DefaultConnection");
 
             return products;
         }

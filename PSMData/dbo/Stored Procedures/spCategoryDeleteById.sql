@@ -4,5 +4,5 @@ AS
 BEGIN
 	set nocount on;
 
-	DELETE FROM [dbo].[Category] WHERE [Id] = @Id;
+	DELETE FROM [dbo].[Category] WHERE [CategoryId] = @Id;
 END

@@ -3,6 +3,6 @@
 	[VariantId] INT NOT NULL,
 	[FeatureCombinationId] INT NOT NULL,
 
-	CONSTRAINT FK_Variant FOREIGN KEY (VariantId) REFERENCES Variant(Id),
-	CONSTRAINT FK_FeatureCombination FOREIGN KEY ([FeatureCombinationId]) REFERENCES FeatureCombination(Id)
+	CONSTRAINT FK_Variant FOREIGN KEY (VariantId) REFERENCES Variant([VariantId]),
+	CONSTRAINT FK_FeatureCombination FOREIGN KEY ([FeatureCombinationId]) REFERENCES FeatureCombination([FeatureCombinationId])
 )

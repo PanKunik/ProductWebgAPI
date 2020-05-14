@@ -12,8 +12,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 // TODO: Validate every given Id (range)
-// TODO: Product - return Variants and features too
-// TODO: Instead returning NoContent return Created at POST methods
+// TODO: Product - return Variants and features too ----> [Two function (full data and simple data)] OR [What if multimapping return null in nested object?]
 // TODO: Refactor SqlException?
 // TODO: Refactor checking if rows in other tables exist?
 
@@ -84,7 +83,7 @@ namespace PSMDataManager.Controllers
                 if(validation.DoesProductExist(variant.ProductId) == true)
                 {
                     data.SaveVariant(variant);
-                    response = Request.CreateResponse(HttpStatusCode.NoContent);
+                    response = Request.CreateResponse(HttpStatusCode.Created);
                 }
                 else
                 {

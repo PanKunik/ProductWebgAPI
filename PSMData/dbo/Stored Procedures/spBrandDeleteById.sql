@@ -4,5 +4,5 @@ AS
 Begin
 	set nocount on;
 	
-	DELETE FROM [dbo].[Brand] WHERE [Id] = @Id;
+	DELETE FROM [dbo].[Brand] WHERE [BrandId] = @Id;
 End

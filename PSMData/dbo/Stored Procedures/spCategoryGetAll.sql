@@ -3,5 +3,5 @@ AS
 BEGIN
 	set nocount on;
 
-	SELECT [Id], [Category] FROM [dbo].[Category];
+	SELECT [CategoryId], [Category] FROM [dbo].[Category];
 END

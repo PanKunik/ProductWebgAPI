@@ -76,7 +76,7 @@ namespace PSMDataManager.Controllers
             if (ModelState.IsValid)
             {
                 data.SaveCategory(Category.Category);
-                response = Request.CreateResponse(HttpStatusCode.NoContent);
+                response = Request.CreateResponse(HttpStatusCode.Created);
             }
             else
             {

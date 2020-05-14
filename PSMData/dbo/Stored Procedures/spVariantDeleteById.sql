@@ -4,5 +4,5 @@ AS
 BEGIN
 	set nocount on;
 
-	DELETE FROM [dbo].[Variant] WHERE [Id] = @Id;
+	DELETE FROM [dbo].[Variant] WHERE [VariantId] = @Id;
 END
